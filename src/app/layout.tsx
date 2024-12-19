@@ -18,15 +18,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-      </head>
       <body className={inter.className}>
         <Navbar />
         <main>
           {children}
         </main>
-        <script src="https://assets.calendly.com/assets/external/widget.js" />
+        <Script 
+          src="https://assets.calendly.com/assets/external/widget.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
