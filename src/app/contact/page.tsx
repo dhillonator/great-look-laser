@@ -128,7 +128,7 @@ export default function ContactPage() {
             style={{ border: 0 }}
             allowFullScreen={true}
             loading="lazy"
-            referrerPolicy="no-referrer-when-default"
+            referrerPolicy="no-referrer-when-downgrade"
             className="grayscale"
           ></iframe>
         </motion.div>
