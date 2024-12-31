@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbar";
+import Topbar from "@/components/Topbar";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,15 +18,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        <main>
+      <head>
+        <Script 
+          src="https://assets.calendly.com/assets/external/widget.js" 
+          strategy="beforeInteractive"
+        />
+        <link
+          href="https://assets.calendly.com/assets/external/widget.css"
+          rel="stylesheet"
+        />
+      </head>
+      <body className={`${inter.className} bg-black`}>
+        <Topbar />
+        <main className="pt-14">
           {children}
         </main>
-        <Script 
-          src="https://assets.calendly.com/assets/external/widget.js"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );

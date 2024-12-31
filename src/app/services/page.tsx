@@ -1,158 +1,145 @@
 "use client"
 
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Check, Info, Calendar } from 'lucide-react';
-
-declare global {
-  interface Window {
-    Calendly: any;
-  }
-}
+import { Star, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function ServicesPage() {
   const openCalendly = () => {
-    if (typeof window !== 'undefined' && window.Calendly) {
-      window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/baljinder-glls'
-      });
-    }
+    window.location.href = 'https://calendly.com/baljinder-glls';
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-black text-white pt-24">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-pink-50 via-purple-50 to-violet-50 overflow-hidden py-24">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-          <div className="absolute top-40 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-40 w-72 h-72 bg-violet-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
-        </div>
+      <div className="relative px-4 py-12">
+        <motion.div 
+          className="absolute inset-0 overflow-hidden pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-rose-500/20 to-purple-600/20 rounded-full blur-3xl" />
+        </motion.div>
 
-        <div className="relative max-w-5xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+        <div className="max-w-5xl mx-auto relative">
+          <motion.h1 
+            className="text-3xl md:text-4xl font-bold mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
             Our Services
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl">
-            Professional laser hair removal treatments customized for women in a private, comfortable setting. 
-            Experience lasting results with our state-of-the-art technology.
-          </p>
+          </motion.h1>
+          <motion.p 
+            className="text-lg text-white/60 max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            Professional laser hair removal treatments customized for women in a private, comfortable setting.
+          </motion.p>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-5xl mx-auto px-4 -mt-12 relative z-10">
-        {/* Treatment Areas Section */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">Treatment Areas</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="group bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-pink-50">
-              <h3 className="text-xl font-semibold mb-6">Face & Neck</h3>
-              <ul className="space-y-4">
-                <li className="flex items-center gap-4">
-                  <div className="w-2 h-2 rounded-full bg-pink-400"></div>
-                  <span className="text-gray-600">Upper Lip</span>
-                </li>
-                <li className="flex items-center gap-4">
-                  <div className="w-2 h-2 rounded-full bg-pink-400"></div>
-                  <span className="text-gray-600">Chin</span>
-                </li>
-                <li className="flex items-center gap-4">
-                  <div className="w-2 h-2 rounded-full bg-pink-400"></div>
-                  <span className="text-gray-600">Full Face</span>
-                </li>
-              </ul>
+      {/* Services Grid */}
+      <div className="max-w-5xl mx-auto px-4 py-12">
+        <div className="grid gap-6">
+          {/* Face Area */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <div className="bg-rose-500/10 p-2 rounded-lg">
+                <Sparkles className="w-6 h-6 text-rose-500" />
+              </div>
+              <h3 className="text-xl font-semibold">Face</h3>
             </div>
+            <ul className="space-y-4">
+              {['Upper Lip', 'Chin', 'Full Face'].map((area) => (
+                <li key={area} className="flex items-center gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                  <span className="text-white/60">{area}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
 
-            <div className="group bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-purple-50">
-              <h3 className="text-xl font-semibold mb-6">Body</h3>
-              <ul className="space-y-4">
-                <li className="flex items-center gap-4">
-                  <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                  <span className="text-gray-600">Full Arms</span>
-                </li>
-                <li className="flex items-center gap-4">
-                  <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                  <span className="text-gray-600">Full Legs</span>
-                </li>
-                <li className="flex items-center gap-4">
-                  <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                  <span className="text-gray-600">Brazilian</span>
-                </li>
-              </ul>
+          {/* Body Areas */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <div className="bg-purple-500/10 p-2 rounded-lg">
+                <Sparkles className="w-6 h-6 text-purple-500" />
+              </div>
+              <h3 className="text-xl font-semibold">Body</h3>
             </div>
-          </div>
-        </section>
+            <ul className="space-y-4">
+              {['Full Arms', 'Full Legs', 'Brazilian'].map((area) => (
+                <li key={area} className="flex items-center gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                  <span className="text-white/60">{area}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </div>
 
-        {/* Process Section */}
-        <section className="mb-16">
+      {/* Treatment Process */}
+      <div className="bg-neutral-950">
+        <div className="max-w-5xl mx-auto px-4 py-16">
           <h2 className="text-2xl font-bold mb-8">Treatment Process</h2>
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="group bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-violet-50">
-              <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-violet-200 transition-colors">
-                <span className="text-violet-600 font-bold text-xl">1</span>
-              </div>
-              <h3 className="font-semibold text-xl mb-3">Consultation</h3>
-              <p className="text-gray-600">
-                Free consultation to assess your skin type and discuss treatment options.
-              </p>
-            </div>
-
-            <div className="group bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-violet-50">
-              <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-violet-200 transition-colors">
-                <span className="text-violet-600 font-bold text-xl">2</span>
-              </div>
-              <h3 className="font-semibold text-xl mb-3">Treatment</h3>
-              <p className="text-gray-600">
-                Quick and effective sessions using advanced laser technology.
-              </p>
-            </div>
-
-            <div className="group bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-violet-50">
-              <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-violet-200 transition-colors">
-                <span className="text-violet-600 font-bold text-xl">3</span>
-              </div>
-              <h3 className="font-semibold text-xl mb-3">Results</h3>
-              <p className="text-gray-600">
-                Progressive reduction in hair growth with each session.
-              </p>
-            </div>
+            {[
+              { step: '1', title: 'Consultation', description: 'Free consultation to assess your skin type and discuss treatment options.' },
+              { step: '2', title: 'Treatment', description: 'Quick and effective sessions using advanced laser technology.' },
+              { step: '3', title: 'Results', description: 'Progressive reduction in hair growth with each session.' }
+            ].map((item) => (
+              <motion.div
+                key={item.step}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+              >
+                <div className="w-10 h-10 bg-gradient-to-r from-rose-500 to-purple-600 rounded-xl flex items-center justify-center mb-4">
+                  <span className="text-white font-bold">{item.step}</span>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                <p className="text-white/60 text-sm">{item.description}</p>
+              </motion.div>
+            ))}
           </div>
-        </section>
+        </div>
+      </div>
 
-        {/* Important Information */}
-        <section className="mb-16">
-          <div className="group bg-gradient-to-br from-pink-50/50 to-purple-50/50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-pink-100/50">
-            <div className="flex items-start gap-4">
-              <Info className="h-6 w-6 text-purple-600 flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-xl mb-4">Important Information</h3>
-                <ul className="space-y-3 text-gray-600">
-                  <li>We provide laser hair removal services exclusively for female clients</li>
-                  <li>Multiple sessions recommended for optimal results</li>
-                  <li>Treatment plans customized to your specific needs</li>
-                  <li>Free consultation available to discuss your goals</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Call to Action */}
-        <section className="text-center py-12">
-          <h2 className="text-2xl font-bold mb-6">Ready to Get Started?</h2>
-          <p className="text-gray-600 mb-8">
-            Book your appointment today and take the first step towards permanent hair reduction.
-          </p>
-          <button 
-            onClick={openCalendly}
-            className="inline-flex items-center gap-2 bg-violet-600 text-white px-8 py-4 rounded-2xl hover:bg-violet-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+      {/* CTA Section */}
+      <div className="bg-black">
+        <div className="max-w-5xl mx-auto px-4 py-16 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
           >
-            <Calendar className="h-5 w-5" />
-            Book Now
-          </button>
-        </section>
+            <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
+            <p className="text-white/60 mb-8">
+              Book your free consultation today and take the first step towards permanent hair reduction.
+            </p>
+            <button
+              onClick={openCalendly}
+              className="bg-gradient-to-r from-rose-500 to-purple-600 px-8 py-3 rounded-full text-lg font-medium hover:opacity-90 transition-opacity"
+            >
+              Book Consultation
+            </button>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

@@ -1,137 +1,214 @@
 "use client"
 
 import React from 'react';
-import { Clock, MapPin, Calendar } from 'lucide-react';
-
-declare global {
-  interface Window {
-    Calendly: any;
-  }
-}
+import { Star, Clock, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function HomePage() {
   const openCalendly = () => {
-    if (typeof window !== 'undefined' && window.Calendly) {
-      window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/baljinder-glls'
-      });
-    }
+    window.location.href = 'https://calendly.com/baljinder-glls';
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-pink-50 via-purple-50 to-violet-50 overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-          <div className="absolute top-40 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-40 w-72 h-72 bg-violet-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
-        </div>
+      <div className="min-h-[85vh] flex flex-col items-center justify-center text-center px-4 relative">
+        <motion.div 
+          className="absolute inset-0 overflow-hidden pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-rose-500/20 to-purple-600/20 rounded-full blur-3xl" />
+        </motion.div>
 
-        <div className="relative py-24 max-w-5xl mx-auto px-4">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
-            Great Look Laser
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl">
-            Experience the confidence of smooth, beautiful skin with our professional laser hair removal services in Surrey.
-          </p>
-        </div>
+        <motion.h1 
+          className="text-4xl md:text-6xl font-bold mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Great Look Laser
+        </motion.h1>
+        
+        <motion.p 
+          className="text-2xl md:text-3xl mb-8 text-white/90"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Goodbye, Unwanted Hair.
+        </motion.p>
+
+        <motion.div 
+          className="flex gap-4 flex-wrap justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <button 
+            onClick={openCalendly}
+            className="bg-gradient-to-r from-rose-500 to-purple-600 px-8 py-3 rounded-full text-lg font-medium hover:opacity-90 transition-opacity"
+          >
+            Book Now
+          </button>
+          <a 
+            href="/faq"
+            className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-white/20 transition-all"
+          >
+            Learn more
+          </a>
+        </motion.div>
+
+        <motion.div 
+          className="absolute bottom-8 left-0 right-0 text-center text-base text-white/60"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          Women Only
+        </motion.div>
       </div>
 
-      {/* Info Cards */}
-      <div className="max-w-5xl mx-auto px-4 -mt-12 relative z-10">
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="group bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-pink-50">
-            <button 
-              onClick={openCalendly}
-              className="flex flex-col items-start w-full"
+      {/* Info Section */}
+      <div className="bg-neutral-950 py-16">
+        <div className="max-w-5xl mx-auto px-4">
+          {/* Quick Info Cards */}
+          <div className="grid gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
             >
-              <div className="mb-4 p-3 bg-pink-50 rounded-xl w-fit group-hover:bg-pink-100 transition-colors">
-                <Calendar className="h-6 w-6 text-pink-600" />
+              <div className="flex items-start gap-4">
+                <div className="bg-rose-500/10 p-2 rounded-lg">
+                  <Clock className="w-6 h-6 text-rose-500" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">Extended Hours</h3>
+                  <p className="text-white/60 text-sm mt-1">
+                    Open Daily: 8AM - 8PM
+                  </p>
+                </div>
               </div>
-              <h3 className="font-semibold text-xl mb-2">Book Now</h3>
-              <span 
-                className="text-gray-600 hover:text-pink-600 cursor-pointer"
-              >
-                Online Booking Available
-              </span>
-            </button>
-          </div>
+            </motion.div>
 
-          <div className="group bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-purple-50">
-            <div className="mb-4 p-3 bg-purple-50 rounded-xl w-fit group-hover:bg-purple-100 transition-colors">
-              <Clock className="h-6 w-6 text-purple-600" />
-            </div>
-            <h3 className="font-semibold text-xl mb-2">Extended Hours</h3>
-            <p className="text-gray-600">Open Daily: 8AM - 8PM</p>
-          </div>
-
-          <div className="group bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-violet-50">
-            <div className="mb-4 p-3 bg-violet-50 rounded-xl w-fit group-hover:bg-violet-100 transition-colors">
-              <MapPin className="h-6 w-6 text-violet-600" />
-            </div>
-            <h3 className="font-semibold text-xl mb-2">Visit Us</h3>
-            <a 
-              href="https://maps.google.com/?q=8925+135A+St+Surrey+BC"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-violet-600"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
             >
-              8925 135A St, Surrey
-            </a>
+              <div className="flex items-start gap-4">
+                <div className="bg-purple-500/10 p-2 rounded-lg">
+                  <MapPin className="w-6 h-6 text-purple-500" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">Location</h3>
+                  <p className="text-white/60 text-sm mt-1">
+                    8925 135A St, Surrey<br />
+                    Client entrance on right side
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
 
       {/* Services Section */}
-      <div className="max-w-5xl mx-auto px-4 py-24">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Professional Laser Hair Removal</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="group bg-gradient-to-br from-pink-50/50 to-purple-50/50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-pink-100/50">
-            <h3 className="text-2xl font-semibold mb-8 text-gray-800">Why Choose Us</h3>
-            <ul className="space-y-6">
-              <li className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-pink-400"></div>
-                <span className="text-gray-600">State-of-the-art laser technology</span>
-              </li>
-              <li className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-pink-400"></div>
-                <span className="text-gray-600">Experienced, licensed professionals</span>
-              </li>
-            </ul>
-          </div>
+      <div className="bg-black py-16">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-white mb-8">Our Services</h2>
           
-          <div className="group bg-gradient-to-br from-purple-50/50 to-violet-50/50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-purple-100/50">
-            <h3 className="text-2xl font-semibold mb-8 text-gray-800">Treatment Areas</h3>
-            <ul className="space-y-6">
-              <li className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                <span className="text-gray-600">Face and Body Treatments</span>
-              </li>
-              <li className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                <span className="text-gray-600">Full Body Packages Available</span>
-              </li>
-            </ul>
+          <div className="grid gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+            >
+              <h3 className="text-lg font-semibold text-white mb-4">Face</h3>
+              <ul className="space-y-3">
+                {['Upper Lip', 'Chin', 'Full Face'].map((area) => (
+                  <li key={area} className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                    <span className="text-white/60">{area}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+            >
+              <h3 className="text-lg font-semibold text-white mb-4">Body</h3>
+              <ul className="space-y-3">
+                {['Full Arms', 'Full Legs', 'Brazilian'].map((area) => (
+                  <li key={area} className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                    <span className="text-white/60">{area}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Call to Action */}
-      <section className="text-center py-12">
-        <h2 className="text-2xl font-bold mb-6">Ready to Get Started?</h2>
-        <p className="text-gray-600 mb-8">
-          Book your appointment today and take the first step towards permanent hair reduction.
-        </p>
-        <button 
-          onClick={openCalendly}
-          className="inline-flex items-center gap-2 bg-violet-600 text-white px-8 py-4 rounded-2xl hover:bg-violet-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-        >
-          <Calendar className="h-5 w-5" />
-          Book Now
-        </button>
-      </section>
+      {/* Contact Section */}
+      <div className="bg-neutral-950 py-16">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-white mb-8">Contact Us</h2>
+
+          <div className="grid gap-6">
+            <motion.a
+              href="tel:604-723-9281"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 block border border-white/10"
+            >
+              <div className="flex items-start gap-4">
+                <div className="bg-rose-500/10 p-2 rounded-lg">
+                  <Star className="w-6 h-6 text-rose-500" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">Call Us</h3>
+                  <p className="text-white/60 text-sm mt-1">
+                    (604) 723-9281
+                  </p>
+                </div>
+              </div>
+            </motion.a>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+            >
+              <div className="flex items-start gap-4">
+                <div className="bg-purple-500/10 p-2 rounded-lg">
+                  <Clock className="w-6 h-6 text-purple-500" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">Hours</h3>
+                  <p className="text-white/60 text-sm mt-1">
+                    Monday - Sunday
+                    <br />
+                    8:00 AM - 8:00 PM
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

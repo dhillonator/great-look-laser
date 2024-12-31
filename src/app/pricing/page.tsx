@@ -1,141 +1,168 @@
 "use client"
 
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Check, Star, Calendar } from 'lucide-react';
-
-declare global {
-  interface Window {
-    Calendly: any;
-  }
-}
+import { Star } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function PricingPage() {
   const openCalendly = () => {
-    if (typeof window !== 'undefined' && window.Calendly) {
-      window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/baljinder-glls'
-      });
-    }
+    window.location.href = 'https://calendly.com/baljinder-glls';
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-black text-white pt-24">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-pink-50 via-purple-50 to-violet-50 overflow-hidden py-24">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-          <div className="absolute top-40 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-40 w-72 h-72 bg-violet-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
-        </div>
+      <div className="relative px-4 py-12">
+        <motion.div 
+          className="absolute inset-0 overflow-hidden pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-rose-500/20 to-purple-600/20 rounded-full blur-3xl" />
+        </motion.div>
 
-        <div className="relative max-w-5xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+        <div className="max-w-5xl mx-auto relative">
+          <motion.h1 
+            className="text-3xl md:text-4xl font-bold mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
             Our Packages
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl">
-            Below are our most popular treatment packages. We understand everyone's needs are unique - 
-            contact us to create a customized package that's perfect for you.
-          </p>
+          </motion.h1>
+          <motion.p 
+            className="text-lg text-white/60 max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            Choose from our popular packages or contact us for custom solutions.
+          </motion.p>
         </div>
       </div>
 
       {/* Pricing Cards */}
-      <div className="max-w-5xl mx-auto px-4 -mt-12 relative z-10">
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+      <div className="max-w-5xl mx-auto px-4 py-12">
+        <div className="grid gap-6">
           {/* Full Body Package */}
-          <div className="group bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-pink-50 relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-gradient-to-r from-violet-600 to-purple-600 text-white px-4 py-2 rounded-bl-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 bg-gradient-to-r from-rose-500 to-purple-600 text-white px-3 py-1 rounded-bl-lg text-sm">
               Most Popular
             </div>
-            <h3 className="text-xl font-semibold mb-4">Full Body Package</h3>
-            <div className="text-3xl font-bold text-violet-600 mb-6">$300</div>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-pink-400"></div>
-                <span className="text-gray-600">Complete full body coverage</span>
-              </li>
-              <li className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-pink-400"></div>
-                <span className="text-gray-600">Maximum value savings</span>
-              </li>
+            <h3 className="text-xl font-semibold mb-2">Full Body Package</h3>
+            <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$300</div>
+            <ul className="space-y-3">
+              {[
+                'Complete coverage',
+                'Best value'
+              ].map((feature) => (
+                <li key={feature} className="flex items-center gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                  <span className="text-white/60">{feature}</span>
+                </li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Premium Combo */}
-          <div className="group bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-purple-50">
-            <h3 className="text-xl font-semibold mb-4">Premium Combo</h3>
-            <div className="text-3xl font-bold text-violet-600 mb-6">$100</div>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                <span className="text-gray-600">Full face treatment</span>
-              </li>
-              <li className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                <span className="text-gray-600">Full arms included</span>
-              </li>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+          >
+            <h3 className="text-xl font-semibold mb-2">Premium Combo</h3>
+            <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$100</div>
+            <ul className="space-y-3">
+              {[
+                'Full face treatment',
+                'Full arms included'
+              ].map((feature) => (
+                <li key={feature} className="flex items-center gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                  <span className="text-white/60">{feature}</span>
+                </li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Lower Body Package */}
-          <div className="group bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-violet-50">
-            <h3 className="text-xl font-semibold mb-4">Lower Body Package</h3>
-            <div className="text-3xl font-bold text-violet-600 mb-6">$150</div>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-violet-400"></div>
-                <span className="text-gray-600">Full legs treatment</span>
-              </li>
-              <li className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full bg-violet-400"></div>
-                <span className="text-gray-600">Brazilian included</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Package Benefits */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
-          <div className="group bg-gradient-to-br from-pink-50/50 to-purple-50/50 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-pink-100/50">
-            <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-pink-200 transition-colors">
-              <Star className="h-6 w-6 text-pink-600" />
-            </div>
-            <h3 className="font-semibold text-lg mb-2">Free Consultation</h3>
-            <p className="text-gray-600">Personalized treatment planning with skin assessment</p>
-          </div>
-
-          <div className="group bg-gradient-to-br from-purple-50/50 to-violet-50/50 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-purple-100/50">
-            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-200 transition-colors">
-              <Star className="h-6 w-6 text-purple-600" />
-            </div>
-            <h3 className="font-semibold text-lg mb-2">Flexible Scheduling</h3>
-            <p className="text-gray-600">Book your sessions at your convenience</p>
-          </div>
-
-          <div className="group bg-gradient-to-br from-violet-50/50 to-pink-50/50 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-violet-100/50">
-            <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-violet-200 transition-colors">
-              <Star className="h-6 w-6 text-violet-600" />
-            </div>
-            <h3 className="font-semibold text-lg mb-2">Expert Care</h3>
-            <p className="text-gray-600">Treatment by licensed professionals</p>
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center py-12">
-          <h2 className="text-2xl font-bold mb-6">Ready to Get Started?</h2>
-          <p className="text-gray-600 mb-8">
-            Book your appointment today and take the first step towards permanent hair reduction.
-          </p>
-          <button 
-            onClick={openCalendly}
-            className="inline-flex items-center gap-2 bg-violet-600 text-white px-8 py-4 rounded-2xl hover:bg-violet-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
           >
-            <Calendar className="h-5 w-5" />
-            Book Now
-          </button>
+            <h3 className="text-xl font-semibold mb-2">Lower Body Package</h3>
+            <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$150</div>
+            <ul className="space-y-3">
+              {[
+                'Full legs treatment',
+                'Brazilian included'
+              ].map((feature) => (
+                <li key={feature} className="flex items-center gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-violet-500" />
+                  <span className="text-white/60">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Package Benefits */}
+      <div className="bg-neutral-950 py-16">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl font-bold mb-8">All Packages Include</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { title: 'Free Consultation', description: 'Personalized treatment planning' },
+              { title: 'Flexible Scheduling', description: 'Book your sessions at your convenience' },
+              { title: 'Expert Care', description: 'Treatment by licensed professionals' }
+            ].map((benefit, index) => (
+              <motion.div
+                key={benefit.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+              >
+                <div className="bg-gradient-to-r from-rose-500/10 to-purple-600/10 p-3 rounded-xl w-fit mb-4">
+                  <Star className="w-6 h-6 text-rose-500" />
+                </div>
+                <h3 className="font-semibold text-lg mb-2">{benefit.title}</h3>
+                <p className="text-white/60">{benefit.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="bg-black py-16">
+        <div className="max-w-5xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
+            <p className="text-white/60 mb-8">
+              Contact us to discuss our packages or create a customized treatment plan that works for you.
+            </p>
+            <button
+              onClick={openCalendly}
+              className="bg-gradient-to-r from-rose-500 to-purple-600 px-8 py-3 rounded-full text-lg font-medium hover:opacity-90 transition-opacity"
+            >
+              Book Consultation
+            </button>
+          </motion.div>
         </div>
       </div>
     </div>
