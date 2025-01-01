@@ -26,8 +26,11 @@ export default function Topbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/services" className="text-white/90 hover:text-white text-sm transition-colors">
-              Services
+            <Link href="/" className="text-white/90 hover:text-white text-sm transition-colors">
+              Home
+            </Link>
+            <Link href="/faq" className="text-white/90 hover:text-white text-sm transition-colors">
+              FAQ
             </Link>
             <Link href="/pricing" className="text-white/90 hover:text-white text-sm transition-colors">
               Pricing
@@ -57,11 +60,11 @@ export default function Topbar() {
               Home
             </Link>
             <Link 
-              href="/services" 
+              href="/faq" 
               className="block text-white/90 hover:text-white py-2"
               onClick={() => setIsMenuOpen(false)}
             >
-              Services
+              FAQ
             </Link>
             <Link 
               href="/pricing" 
