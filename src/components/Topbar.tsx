@@ -1,8 +1,7 @@
 "use client"
 
 import React from 'react';
-import Link from 'next/link';
-import { Calendar, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Topbar() {
@@ -10,6 +9,14 @@ export default function Topbar() {
   
   const openCalendly = () => {
     window.location.href = 'https://calendly.com/baljinder-glls';
+  };
+
+  const scrollToSection = (id: string) => {
+    setIsMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -26,18 +33,30 @@ export default function Topbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-white/90 hover:text-white text-sm transition-colors">
+            <button 
+              onClick={() => scrollToSection('home')}
+              className="text-white/90 hover:text-white text-sm transition-colors"
+            >
               Home
-            </Link>
-            <Link href="/faq" className="text-white/90 hover:text-white text-sm transition-colors">
-              FAQ
-            </Link>
-            <Link href="/pricing" className="text-white/90 hover:text-white text-sm transition-colors">
+            </button>
+            <button 
+              onClick={() => scrollToSection('pricing')}
+              className="text-white/90 hover:text-white text-sm transition-colors"
+            >
               Pricing
-            </Link>
-            <Link href="/contact" className="text-white/90 hover:text-white text-sm transition-colors">
+            </button>
+            <button 
+              onClick={() => scrollToSection('faq')}
+              className="text-white/90 hover:text-white text-sm transition-colors"
+            >
+              FAQ
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="text-white/90 hover:text-white text-sm transition-colors"
+            >
               Contact
-            </Link>
+            </button>
           </div>
 
           {/* Book Now Button - Always visible */}
@@ -52,34 +71,30 @@ export default function Topbar() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 space-y-4 border-t border-white/10">
-            <Link 
-              href="/" 
-              className="block text-white/90 hover:text-white py-2"
-              onClick={() => setIsMenuOpen(false)}
+            <button 
+              onClick={() => scrollToSection('home')}
+              className="block w-full text-left text-white/90 hover:text-white py-2"
             >
               Home
-            </Link>
-            <Link 
-              href="/faq" 
-              className="block text-white/90 hover:text-white py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              FAQ
-            </Link>
-            <Link 
-              href="/pricing" 
-              className="block text-white/90 hover:text-white py-2"
-              onClick={() => setIsMenuOpen(false)}
+            </button>
+            <button 
+              onClick={() => scrollToSection('pricing')}
+              className="block w-full text-left text-white/90 hover:text-white py-2"
             >
               Pricing
-            </Link>
-            <Link 
-              href="/contact" 
-              className="block text-white/90 hover:text-white py-2"
-              onClick={() => setIsMenuOpen(false)}
+            </button>
+            <button 
+              onClick={() => scrollToSection('faq')}
+              className="block w-full text-left text-white/90 hover:text-white py-2"
+            >
+              FAQ
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="block w-full text-left text-white/90 hover:text-white py-2"
             >
               Contact
-            </Link>
+            </button>
           </div>
         )}
       </div>
