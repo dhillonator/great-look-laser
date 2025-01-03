@@ -3,16 +3,23 @@
 import React from 'react';
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
+import { trackBooking, event } from '@/lib/analytics';
 
 export default function Topbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const openCalendly = () => {
+    trackBooking();
     window.location.href = 'https://calendly.com/baljinder-glls';
   };
 
   const scrollToSection = (id: string) => {
     setIsMenuOpen(false);
+    event({
+      action: 'navigation_click',
+      category: 'Navigation',
+      label: id
+    });
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });

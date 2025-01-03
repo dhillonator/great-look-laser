@@ -1,39 +1,32 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Topbar from "@/components/Topbar";
-import Script from "next/script";
+import type { Metadata } from 'next'
+import { Roboto } from 'next/font/google'
+import './globals.css'
+import Topbar from '@/components/Topbar'
+import AnalyticsWrapper from '@/components/AnalyticsWrapper'
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  weight: ['100', '300', '400', '500', '700', '900'],
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
-  title: "Great Look Laser",
-  description: "Professional Laser Hair Removal Services in Surrey",
-};
+  title: 'Great Look Laser - Professional Laser Hair Removal in Surrey',
+  description: 'Discover professional laser hair removal services in Surrey, BC. Book your free consultation today and experience the latest in permanent hair reduction technology.',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
-      <head>
-        <Script 
-          src="https://assets.calendly.com/assets/external/widget.js" 
-          strategy="beforeInteractive"
-        />
-        <link
-          href="https://assets.calendly.com/assets/external/widget.css"
-          rel="stylesheet"
-        />
-      </head>
-      <body className={`${inter.className} bg-black`}>
-        <Topbar />
-        <main className="pt-14">
+      <body className={roboto.className}>
+        <AnalyticsWrapper>
+          <Topbar />
           {children}
-        </main>
+        </AnalyticsWrapper>
       </body>
     </html>
-  );
+  )
 }

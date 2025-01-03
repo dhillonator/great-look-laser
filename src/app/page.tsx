@@ -3,6 +3,7 @@
 import React from 'react';
 import { Star, Clock, MapPin, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { event } from '@/lib/analytics';
 
 export default function HomePage() {
   const openCalendly = () => {
@@ -92,13 +93,25 @@ export default function HomePage() {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <button 
-              onClick={openCalendly}
+              onClick={() => {
+                event({
+                  action: 'hero_booking',
+                  category: 'Conversion',
+                  label: 'Hero Section Book Now'
+                });
+                openCalendly();
+              }}
               className="bg-gradient-to-r from-rose-500 to-purple-600 px-8 py-3 rounded-full text-lg font-medium hover:opacity-90 transition-opacity"
             >
               Book Now
             </button>
             <a 
               href="#faq"
+              onClick={() => event({
+                action: 'hero_learn_more',
+                category: 'Engagement',
+                label: 'Hero Section Learn More'
+              })}
               className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-white/20 transition-all"
             >
               Learn more
@@ -144,7 +157,15 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 relative overflow-hidden"
+                onClick={() => {
+                  event({
+                    action: 'package_booking',
+                    category: 'Booking',
+                    label: 'Full Body Package'
+                  });
+                  window.location.href = 'https://calendly.com/baljinder-glls/30min?back=1&month=2025-01';
+                }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 relative overflow-hidden cursor-pointer hover:bg-white/10 transition-all"
               >
                 <div className="absolute top-0 right-0 bg-gradient-to-r from-rose-500 to-purple-600 text-white px-3 py-1 rounded-bl-lg text-sm">
                   Most Popular
@@ -177,7 +198,15 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+                onClick={() => {
+                  event({
+                    action: 'package_booking',
+                    category: 'Booking',
+                    label: 'Lower Body Package'
+                  });
+                  window.location.href = 'https://calendly.com/baljinder-glls/lower-body-legs-brazilian?back=1&month=2025-01';
+                }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
               >
                 <h3 className="text-xl font-semibold mb-2">Lower Body Package</h3>
                 <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$150</div>
@@ -207,7 +236,15 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+                onClick={() => {
+                  event({
+                    action: 'package_booking',
+                    category: 'Booking',
+                    label: 'Face + Full Arms'
+                  });
+                  window.location.href = 'https://calendly.com/baljinder-glls/full-face-arms?back=1&month=2025-01';
+                }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
               >
                 <h3 className="text-xl font-semibold mb-2">Face + Full Arms</h3>
                 <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$100</div>
@@ -237,7 +274,15 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+                onClick={() => {
+                  event({
+                    action: 'package_booking',
+                    category: 'Booking',
+                    label: 'Face + Underarms'
+                  });
+                  window.location.href = 'https://calendly.com/baljinder-glls/full-face-arms-clone?back=1&month=2025-01';
+                }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
               >
                 <h3 className="text-xl font-semibold mb-2">Face + Underarms Only</h3>
                 <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$50</div>
@@ -293,7 +338,12 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+                  onClick={() => event({
+                    action: 'faq_view',
+                    category: 'Content',
+                    label: faq.question
+                  })}
+                  className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer"
                 >
                   <h3 className="text-xl font-semibold mb-3">{faq.question}</h3>
                   <p className="text-white/60 whitespace-pre-line">{faq.answer}</p>
@@ -333,6 +383,11 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
+                onClick={() => event({
+                  action: 'contact_click',
+                  category: 'Contact',
+                  label: 'Phone'
+                })}
                 className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 block hover:bg-white/10 transition-colors"
               >
                 <div className="flex items-start gap-4">
@@ -357,6 +412,11 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
+                onClick={() => event({
+                  action: 'contact_click',
+                  category: 'Contact',
+                  label: 'Location'
+                })}
                 className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 block hover:bg-white/10 transition-colors"
               >
                 <div className="flex items-start gap-4">
@@ -402,6 +462,11 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
+                onClick={() => event({
+                  action: 'map_view',
+                  category: 'Contact',
+                  label: 'Interactive Map'
+                })}
                 className="w-full h-[400px] rounded-2xl overflow-hidden border border-white/10"
               >
                 <iframe
@@ -422,5 +487,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-            
