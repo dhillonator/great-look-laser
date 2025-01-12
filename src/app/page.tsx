@@ -58,105 +58,100 @@ export default function HomePage() {
       {/* Content */}
       <div className="relative">
         {/* Hero Section */}
-        <section id="home" className="min-h-screen flex flex-col items-center justify-center text-center px-4 relative">
-          <motion.div 
-            className="absolute inset-0 overflow-hidden pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-rose-500/20 to-purple-600/20 rounded-full blur-3xl" />
-          </motion.div>
+<section id="home" className="min-h-screen flex flex-col items-center justify-center text-center px-4 relative">
+  <motion.div 
+    className="absolute inset-0 overflow-hidden pointer-events-none"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 1 }}
+  >
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-rose-500/20 to-purple-600/20 rounded-full blur-3xl" />
+  </motion.div>
 
-          <motion.h1 
-            className="text-4xl md:text-6xl font-bold mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Great Look Laser
-          </motion.h1>
-          
-          <motion.p 
-            className="text-2xl md:text-3xl mb-8 text-white/90"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Goodbye, Unwanted Hair.
-          </motion.p>
+  <motion.h1 
+    className="text-4xl md:text-6xl font-bold mb-4"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+  >
+    Great Look Laser
+  </motion.h1>
+  
+  <motion.p 
+    className="text-2xl md:text-3xl mb-8 text-white/90"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: 0.2 }}
+  >
+    Goodbye, Unwanted Hair.
+  </motion.p>
 
-          <motion.div 
-            className="flex gap-4 flex-wrap justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <button 
-              onClick={() => {
-                event({
-                  action: 'hero_booking',
-                  category: 'Conversion',
-                  label: 'Hero Section Book Now'
-                });
-                openCalendly();
-              }}
-              className="bg-gradient-to-r from-rose-500 to-purple-600 px-8 py-3 rounded-full text-lg font-medium hover:opacity-90 transition-opacity"
-            >
-              Book Now
-            </button>
-            <a 
-              href="#faq"
-              onClick={() => event({
-                action: 'hero_learn_more',
-                category: 'Engagement',
-                label: 'Hero Section Learn More'
-              })}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-white/20 transition-all"
-            >
-              Learn more
-            </a>
-          </motion.div>
+  <motion.div 
+    className="flex gap-4 flex-wrap justify-center"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: 0.4 }}
+  >
+    <button 
+      onClick={() => {
+        event({
+          action: 'hero_booking',
+          category: 'Conversion',
+          label: 'Hero Section Book Now'
+        });
+        openCalendly();
+      }}
+      className="bg-gradient-to-r from-rose-500 to-purple-600 px-8 py-3 rounded-full text-lg font-medium hover:opacity-90 transition-opacity"
+    >
+      Book Now
+    </button>
+    <a 
+      href="#pricing"
+      onClick={() => event({
+        action: 'hero_learn_more',
+        category: 'Engagement',
+        label: 'Hero Section Learn More'
+      })}
+      className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-white/20 transition-all"
+    >
+      Learn more
+    </a>
+  </motion.div>
 
-          <motion.div 
-            className="absolute bottom-8 left-0 right-0 text-center text-base text-white/60"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            Women Only
-          </motion.div>
-        </section>
+  <motion.div 
+    className="absolute bottom-8 left-0 right-0 text-center text-base text-white/60"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.6, delay: 0.6 }}
+  >
+    Women Only
+  </motion.div>
+</section>
 
 {/* Pricing Section */}
 <section id="pricing" className="min-h-screen py-24 px-4">
   <div className="max-w-5xl mx-auto">
     <motion.h2 
       className="text-3xl md:text-4xl font-bold mb-4"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
     >
       Our Services
     </motion.h2>
+    
     <motion.p 
       className="text-lg text-white/60 max-w-2xl mb-12"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.2 }}
     >
       Choose from our range of professional laser hair removal treatments.
     </motion.p>
 
-    <motion.div 
-      className="grid gap-6"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
+    <div className="grid gap-6">
       {[
         {
           name: "Full Body",
@@ -218,14 +213,10 @@ export default function HomePage() {
       ].map((service, index) => (
         <motion.div
           key={service.name}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ 
-            duration: 0.8,
-            ease: "easeOut",
-            delay: index * 0.1
-          }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 + (index * 0.1) }}
           onClick={() => {
             event({
               action: 'package_booking',
@@ -248,7 +239,7 @@ export default function HomePage() {
           </div>
         </motion.div>
       ))}
-    </motion.div>
+    </div>
   </div>
 </section>
 
