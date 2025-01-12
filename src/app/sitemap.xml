@@ -1,0 +1,13 @@
+// app/sitemap.ts
+export default async function sitemap() {
+  const baseUrl = 'https://greatlooklaser.ca'
+
+  return [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 1,
+    }
+  ]
+}

@@ -128,186 +128,202 @@ export default function HomePage() {
           </motion.div>
         </section>
 
-        {/* Pricing Section */}
-        <section id="pricing" className="min-h-screen py-24 px-4">
-          <div className="max-w-5xl mx-auto">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              Our Packages
-            </motion.h2>
-            <motion.p 
-              className="text-lg text-white/60 max-w-2xl mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Choose from our popular packages or contact us for custom solutions.
-            </motion.p>
+{/* Pricing Section */}
+<section id="pricing" className="min-h-screen py-24 px-4">
+  <div className="max-w-5xl mx-auto">
+    <motion.h2 
+      className="text-3xl md:text-4xl font-bold mb-4"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      Our Services
+    </motion.h2>
+    <motion.p 
+      className="text-lg text-white/60 max-w-2xl mb-12"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+    >
+      Choose from our range of professional laser hair removal treatments.
+    </motion.p>
 
-            <div className="grid gap-6">
-              {/* Full Body Package */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                onClick={() => {
-                  event({
-                    action: 'package_booking',
-                    category: 'Booking',
-                    label: 'Full Body Package'
-                  });
-                  window.location.href = 'https://calendly.com/baljinder-glls/30min?back=1&month=2025-01';
-                }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 relative overflow-hidden cursor-pointer hover:bg-white/10 transition-all"
-              >
-                <div className="absolute top-0 right-0 bg-gradient-to-r from-rose-500 to-purple-600 text-white px-3 py-1 rounded-bl-lg text-sm">
-                  Most Popular
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Full Body Package</h3>
-                <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$300</div>
-                <ul className="space-y-3">
-                  {[
-                    'Complete coverage',
-                    'Best value'
-                  ].map((feature, index) => (
-                    <motion.li 
-                      key={feature} 
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-rose-500" />
-                      <span className="text-white/60">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
+    <div className="grid gap-6">
+      {/* Full Body */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        onClick={() => {
+          event({
+            action: 'package_booking',
+            category: 'Booking',
+            label: 'Full Body'
+          });
+          window.location.href = 'https://calendly.com/baljinder-glls/30min';
+        }}
+        className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 relative overflow-hidden cursor-pointer hover:bg-white/10 transition-all"
+      >
+        <div className="absolute top-0 right-0 bg-gradient-to-r from-rose-500 to-purple-600 text-white px-3 py-1 rounded-bl-lg text-sm">
+          Most Popular
+        </div>
+        <h3 className="text-xl font-semibold mb-2">Full Body</h3>
+        <p className="text-white/60 mb-4">2 hrs 30 min | Complete body treatment</p>
+        <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$300</div>
+      </motion.div>
 
-              {/* Lower Body Package */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                onClick={() => {
-                  event({
-                    action: 'package_booking',
-                    category: 'Booking',
-                    label: 'Lower Body Package'
-                  });
-                  window.location.href = 'https://calendly.com/baljinder-glls/lower-body-legs-brazilian?back=1&month=2025-01';
-                }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
-              >
-                <h3 className="text-xl font-semibold mb-2">Lower Body Package</h3>
-                <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$150</div>
-                <ul className="space-y-3">
-                  {[
-                    'Full legs treatment',
-                    'Brazilian included'
-                  ].map((feature, index) => (
-                    <motion.li 
-                      key={feature} 
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-                      <span className="text-white/60">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
+      {/* Legs + Brazilian */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        onClick={() => {
+          event({
+            action: 'package_booking',
+            category: 'Booking',
+            label: 'Legs + Brazilian'
+          });
+          window.location.href = 'https://calendly.com/baljinder-glls/lower-body-legs-brazilian';
+        }}
+        className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
+      >
+        <h3 className="text-xl font-semibold mb-2">Legs + Brazilian</h3>
+        <p className="text-white/60 mb-4">1 hr | Legs and Brazilian combo</p>
+        <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$150</div>
+      </motion.div>
 
-              {/* Face + Full Arms */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                onClick={() => {
-                  event({
-                    action: 'package_booking',
-                    category: 'Booking',
-                    label: 'Face + Full Arms'
-                  });
-                  window.location.href = 'https://calendly.com/baljinder-glls/full-face-arms?back=1&month=2025-01';
-                }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
-              >
-                <h3 className="text-xl font-semibold mb-2">Face + Full Arms</h3>
-                <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$100</div>
-                <ul className="space-y-3">
-                  {[
-                    'Face treatment',
-                    'Full arms included'
-                  ].map((feature, index) => (
-                    <motion.li 
-                      key={feature} 
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: 0.7 + index * 0.1 }}
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-purple-500" />
-                      <span className="text-white/60">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
+      {/* Face + Full Arms */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        onClick={() => {
+          event({
+            action: 'package_booking',
+            category: 'Booking',
+            label: 'Face + Full Arms'
+          });
+          window.location.href = 'https://calendly.com/baljinder-glls/full-face-arms';
+        }}
+        className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
+      >
+        <h3 className="text-xl font-semibold mb-2">Face + Full Arms</h3>
+        <p className="text-white/60 mb-4">1 hr | Face and arms package</p>
+        <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$100</div>
+      </motion.div>
 
-              {/* Face + Underarms Package */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                onClick={() => {
-                  event({
-                    action: 'package_booking',
-                    category: 'Booking',
-                    label: 'Face + Underarms'
-                  });
-                  window.location.href = 'https://calendly.com/baljinder-glls/full-face-arms-clone?back=1&month=2025-01';
-                }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
-              >
-                <h3 className="text-xl font-semibold mb-2">Face + Underarms Only</h3>
-                <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$50</div>
-                <ul className="space-y-3">
-                  {[
-                    'Face treatment',
-                    'Underarms included'
-                  ].map((feature, index) => (
-                    <motion.li 
-                      key={feature} 
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: 0.8 + index * 0.1 }}
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-                      <span className="text-white/60">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            </div>
-          </div>
-        </section>
+      {/* Face + Underarms */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        onClick={() => {
+          event({
+            action: 'package_booking',
+            category: 'Booking',
+            label: 'Face + Underarms'
+          });
+          window.location.href = 'https://calendly.com/baljinder-glls/full-face-arms-clone';
+        }}
+        className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
+      >
+        <h3 className="text-xl font-semibold mb-2">Face + Underarms</h3>
+        <p className="text-white/60 mb-4">30 min | Face and underarms combo</p>
+        <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$50</div>
+      </motion.div>
+
+      {/* Face */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.7 }}
+        onClick={() => {
+          event({
+            action: 'package_booking',
+            category: 'Booking',
+            label: 'Face'
+          });
+          window.location.href = 'https://calendly.com/baljinder-glls/legs-clone';
+        }}
+        className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
+      >
+        <h3 className="text-xl font-semibold mb-2">Face</h3>
+        <p className="text-white/60 mb-4">25 min | Complete facial treatment</p>
+        <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$40</div>
+      </motion.div>
+
+      {/* Underarms */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        onClick={() => {
+          event({
+            action: 'package_booking',
+            category: 'Booking',
+            label: 'Underarms'
+          });
+          window.location.href = 'https://calendly.com/baljinder-glls/face-clone';
+        }}
+        className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
+      >
+        <h3 className="text-xl font-semibold mb-2">Underarms</h3>
+        <p className="text-white/60 mb-4">10 min | Quick underarm service</p>
+        <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$20</div>
+      </motion.div>
+
+      {/* Legs */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.9 }}
+        onClick={() => {
+          event({
+            action: 'package_booking',
+            category: 'Booking',
+            label: 'Legs'
+          });
+          window.location.href = 'https://calendly.com/baljinder-glls/legs-brazilian-clone';
+        }}
+        className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
+      >
+        <h3 className="text-xl font-semibold mb-2">Legs</h3>
+        <p className="text-white/60 mb-4">45 min | Full legs treatment</p>
+        <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$100</div>
+      </motion.div>
+
+      {/* Brazilian */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 1.0 }}
+        onClick={() => {
+          event({
+            action: 'package_booking',
+            category: 'Booking',
+            label: 'Brazilian'
+          });
+          window.location.href = 'https://calendly.com/baljinder-glls/underarms-clone';
+        }}
+        className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 cursor-pointer hover:bg-white/10 transition-all"
+      >
+        <h3 className="text-xl font-semibold mb-2">Brazilian</h3>
+        <p className="text-white/60 mb-4">20 min | Brazilian area only</p>
+        <div className="text-3xl font-bold text-gradient bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent mb-4">$50</div>
+      </motion.div>
+    </div>
+  </div>
+</section>
 
         {/* FAQ Section */}
         <section id="faq" className="min-h-screen py-24 px-4">
@@ -450,7 +466,7 @@ export default function HomePage() {
                     <h3 className="font-semibold text-xl mb-2">Hours</h3>
                     <p className="text-white/60">
                       Monday - Sunday<br />
-                      8:00 AM - 8:00 PM
+                      9:00 AM - 6:00 PM
                     </p>
                   </div>
                 </div>
