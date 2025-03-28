@@ -46,80 +46,87 @@ export default function HomePage() {
   ];
 
   return (
-    <>
-      {/* Hero Section with Background Image - Mobile Optimized */}
+    <div>
+      {/* Hero Section with Background Image */}
       <section 
         id="home" 
-        className="min-h-screen flex flex-col items-start justify-center px-4 md:px-12 lg:px-20 relative"
+        className="relative min-h-screen flex items-center justify-center"
         style={{
           backgroundImage: "url('/legs-image.jpg')",
           backgroundSize: "cover",
-          backgroundPosition: "70% center", /* Shift position to show more of the legs on mobile */
+          backgroundPosition: "center",
           backgroundRepeat: "no-repeat"
         }}
       >
         {/* Gradient overlay to ensure text is readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
         
-        <div className="relative z-10 max-w-lg mt-16 md:mt-0"> {/* Added margin-top to push content down on mobile */}
-          <motion.h1 
-            className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-md"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Great Look Laser
-          </motion.h1>
-          
-          <motion.p 
-            className="text-2xl md:text-3xl mb-8 text-white drop-shadow-md"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Reveal Your Smoothest Skin
-          </motion.p>
-
-          <motion.div 
-            className="flex gap-4 flex-wrap"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <button 
-              onClick={() => {
-                event({
-                  action: 'hero_booking',
-                  category: 'Conversion',
-                  label: 'Hero Section Book Now'
-                });
-                openCalendly();
-              }}
-              className="bg-orange-500 px-8 py-3 rounded-full text-lg font-medium hover:opacity-90 transition-opacity text-white shadow-lg"
+        {/* Content container with precise positioning */}
+        <div className="container mx-auto px-4 relative" style={{ paddingTop: '11vh' }}>
+          <div className="grid grid-cols-12">
+            {/* Empty columns for spacing on small screens */}
+            <div className="hidden md:block col-span-3"></div>
+            
+            {/* Content positioned in the middle columns with responsive adjustments */}
+            <motion.div 
+              className="col-span-12 md:col-span-6 lg:col-span-5 xl:col-span-4 relative z-10 lg:ml-12 xl:ml-6 md:mt-30 lg:mt-34 xl:mt-38"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
             >
-              Book Now
-            </button>
-            <a 
-              href="#pricing"
-              onClick={() => event({
-                action: 'hero_learn_more',
-                category: 'Engagement',
-                label: 'Hero Section Learn More'
-              })}
-              className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-white/30 transition-all"
-            >
-              Learn more
-            </a>
-          </motion.div>
+              <motion.h1 
+                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-white"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                style={{ fontWeight: 600, letterSpacing: '0.01em', fontFamily: "'Roboto', sans-serif" }}
+              >
+                Great Look Laser
+              </motion.h1>
+              
+              <motion.p 
+                className="text-xl md:text-2xl mb-5 text-white"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                style={{ fontWeight: 300, letterSpacing: '0.03em', fontFamily: "'Roboto', sans-serif" }}
+              >
+                Reveal Your Smoothest Skin
+              </motion.p>
 
-          <motion.div 
-            className="mt-8 text-base bg-black/40 inline-block px-4 py-1 rounded-full text-white/90"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            Women Only
-          </motion.div>
+              <motion.div 
+                className="flex gap-3 flex-wrap"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <button 
+                  onClick={() => {
+                    event({
+                      action: 'hero_booking',
+                      category: 'Conversion',
+                      label: 'Hero Section Book Now'
+                    });
+                    openCalendly();
+                  }}
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-2 rounded-full text-base font-medium hover:opacity-90 transition-opacity text-white shadow-lg"
+                >
+                  Book Now
+                </button>
+                <a 
+                  href="#pricing"
+                  onClick={() => event({
+                    action: 'hero_learn_more',
+                    category: 'Engagement',
+                    label: 'Hero Section Learn More'
+                  })}
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-5 py-2 rounded-full text-base font-medium hover:bg-white/30 transition-all"
+                >
+                  Learn more
+                </a>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -132,18 +139,30 @@ export default function HomePage() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            style={{ fontWeight: 700, letterSpacing: '-0.01em' }}
           >
             Our Services
           </motion.h2>
           
           <motion.p 
-            className="text-lg text-gray-600 max-w-2xl mb-12"
+            className="text-lg text-gray-600 max-w-2xl mb-3"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ fontWeight: 400 }}
           >
             Choose from our range of professional laser hair removal treatments.
+          </motion.p>
+          
+          <motion.p 
+            className="text-base text-orange-600 max-w-2xl mb-12 italic"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            Our services are exclusively for women in a comfortable, private setting.
           </motion.p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -247,6 +266,7 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            style={{ fontWeight: 700, letterSpacing: '-0.01em' }}
           >
             Frequently Asked Questions
           </motion.h2>
@@ -291,6 +311,7 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            style={{ fontWeight: 700, letterSpacing: '-0.01em' }}
           >
             Contact Us
           </motion.h2>
@@ -428,6 +449,6 @@ export default function HomePage() {
           <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Great Look Laser. All rights reserved.</p>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
