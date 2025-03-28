@@ -3,14 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #f7f4ed;
   --foreground: #171717;
+  --accent: #f97316;
+  --accent-foreground: #ffffff;
+  --muted: #f5f0e5;
+  --muted-foreground: #737373;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Keep light theme for both modes */
+    --background: #f7f4ed;
+    --foreground: #171717;
+    --accent: #f97316;
+    --accent-foreground: #ffffff;
+    --muted: #f5f0e5;
+    --muted-foreground: #737373;
   }
 }
 
@@ -18,6 +27,19 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Transitions for hover effects */
+button, a {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 
 @keyframes blob {
@@ -45,4 +67,22 @@ body {
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+/* Background gradient text effect */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Custom shadows for cards */
+.shadow-soft {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 
+              0 4px 6px -2px rgba(0, 0, 0, 0.025);
+}
+
+/* Orange glow for buttons on hover */
+.hover-glow:hover {
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
 }
