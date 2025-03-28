@@ -46,24 +46,24 @@ export default function HomePage() {
   ];
 
   return (
-    <div>
-      {/* Hero Section with Background Image */}
+    <>
+      {/* Hero Section with Background Image - Mobile Optimized */}
       <section 
         id="home" 
         className="min-h-screen flex flex-col items-start justify-center px-4 md:px-12 lg:px-20 relative"
         style={{
           backgroundImage: "url('/legs-image.jpg')",
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "70% center", /* Shift position to show more of the legs on mobile */
           backgroundRepeat: "no-repeat"
         }}
       >
         {/* Gradient overlay to ensure text is readable */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent z-0"></div>
         
-        <motion.div className="relative z-10 max-w-lg">
+        <div className="relative z-10 max-w-lg mt-16 md:mt-0"> {/* Added margin-top to push content down on mobile */}
           <motion.h1 
-            className="text-4xl md:text-6xl font-bold mb-4 text-white"
+            className="text-4xl md:text-6xl font-bold mb-4 text-white drop-shadow-md"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -72,7 +72,7 @@ export default function HomePage() {
           </motion.h1>
           
           <motion.p 
-            className="text-2xl md:text-3xl mb-8 text-white"
+            className="text-2xl md:text-3xl mb-8 text-white drop-shadow-md"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -95,7 +95,7 @@ export default function HomePage() {
                 });
                 openCalendly();
               }}
-              className="bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-3 rounded-full text-lg font-medium hover:opacity-90 transition-opacity text-white shadow-lg"
+              className="bg-orange-500 px-8 py-3 rounded-full text-lg font-medium hover:opacity-90 transition-opacity text-white shadow-lg"
             >
               Book Now
             </button>
@@ -113,14 +113,14 @@ export default function HomePage() {
           </motion.div>
 
           <motion.div 
-            className="mt-12 text-base bg-black/40 inline-block px-4 py-1 rounded-full text-white/90"
+            className="mt-8 text-base bg-black/40 inline-block px-4 py-1 rounded-full text-white/90"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             Women Only
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Pricing Section - Beige Background (from wall color) */}
@@ -428,6 +428,6 @@ export default function HomePage() {
           <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Great Look Laser. All rights reserved.</p>
         </div>
       </footer>
-    </div>
+    </>
   );
 }

@@ -86,3 +86,31 @@ button, a {
 .hover-glow:hover {
   box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
 }
+
+/* Improved mobile menu styling */
+.menu-fullscreen {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Additional responsive improvements */
+@media (max-width: 768px) {
+  /* Makes the background image position better on mobile */
+  #home {
+    background-position: 70% center !important;
+  }
+  
+  /* Ensures buttons are more touch-friendly on mobile */
+  .rounded-full {
+    min-height: 44px;
+  }
+  
+  /* Better text readability on mobile */
+  .drop-shadow-md {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}

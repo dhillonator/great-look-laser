@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { trackBooking, event } from '@/lib/analytics';
 
@@ -42,109 +42,102 @@ export default function Topbar() {
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-[#f5f0e5] shadow-md text-gray-800' : 'bg-transparent text-white'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo/Brand */}
-          <div className={`font-semibold text-lg transition-colors ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-            Great Look Laser
+    <>
+      {/* Fixed top nav bar - more compact for mobile */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-[#f5f0e5]/90 backdrop-blur-sm shadow-md' : 'bg-transparent'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between h-14">
+            {/* Logo/Brand */}
+            <div className={`font-semibold text-lg ${scrolled ? 'text-gray-800' : 'text-white'}`}>
+              Great Look Laser
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={`md:hidden ${scrolled ? 'text-gray-800' : 'text-white'}`}
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8">
+              <button 
+                onClick={() => scrollToSection('home')}
+                className={`text-sm transition-colors ${
+                  scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80'
+                }`}
+              >
+                Home
+              </button>
+              <button 
+                onClick={() => scrollToSection('pricing')}
+                className={`text-sm transition-colors ${
+                  scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80'
+                }`}
+              >
+                Pricing
+              </button>
+              <button 
+                onClick={() => scrollToSection('faq')}
+                className={`text-sm transition-colors ${
+                  scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80'
+                }`}
+              >
+                FAQ
+              </button>
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className={`text-sm transition-colors ${
+                  scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80'
+                }`}
+              >
+                Contact
+              </button>
+            </div>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`md:hidden ${scrolled ? 'text-gray-800' : 'text-white'}`}
-          >
-            <Menu className="h-6 w-6" />
-          </button>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <button 
-              onClick={() => scrollToSection('home')}
-              className={`text-sm hover:opacity-80 transition-colors ${
-                scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white/90 hover:text-white'
-              }`}
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection('pricing')}
-              className={`text-sm hover:opacity-80 transition-colors ${
-                scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white/90 hover:text-white'
-              }`}
-            >
-              Pricing
-            </button>
-            <button 
-              onClick={() => scrollToSection('faq')}
-              className={`text-sm hover:opacity-80 transition-colors ${
-                scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white/90 hover:text-white'
-              }`}
-            >
-              FAQ
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')}
-              className={`text-sm hover:opacity-80 transition-colors ${
-                scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white/90 hover:text-white'
-              }`}
-            >
-              Contact
-            </button>
-          </div>
-
-          {/* Book Now Button - Always visible */}
-          <button 
-            onClick={openCalendly}
-            className="bg-orange-500 hover:bg-orange-600 px-4 py-1.5 rounded-full text-sm text-white font-medium transition-colors shadow-sm"
-          >
-            Book Now
-          </button>
         </div>
+      </nav>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className={`md:hidden py-4 space-y-4 border-t ${
-            scrolled ? 'border-orange-200' : 'border-white/10'
-          }`}>
+      {/* Fullscreen Mobile Menu - overlays content instead of pushing it down */}
+      {isMenuOpen && (
+        <div className="md:hidden fixed inset-0 pt-14 z-40 bg-black/90 backdrop-blur-md flex flex-col justify-center items-center menu-fullscreen">
+          <div className="flex flex-col gap-8 text-center">
             <button 
               onClick={() => scrollToSection('home')}
-              className={`block w-full text-left py-2 ${
-                scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white/90 hover:text-white'
-              }`}
+              className="text-white text-xl font-medium"
             >
               Home
             </button>
             <button 
               onClick={() => scrollToSection('pricing')}
-              className={`block w-full text-left py-2 ${
-                scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white/90 hover:text-white'
-              }`}
+              className="text-white text-xl font-medium"
             >
               Pricing
             </button>
             <button 
               onClick={() => scrollToSection('faq')}
-              className={`block w-full text-left py-2 ${
-                scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white/90 hover:text-white'
-              }`}
+              className="text-white text-xl font-medium"
             >
               FAQ
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
-              className={`block w-full text-left py-2 ${
-                scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white/90 hover:text-white'
-              }`}
+              className="text-white text-xl font-medium"
             >
               Contact
             </button>
+            <button 
+              onClick={openCalendly}
+              className="mt-4 bg-orange-500 hover:bg-orange-600 px-8 py-3 rounded-full text-lg text-white font-medium transition-colors shadow-md"
+            >
+              Book Now
+            </button>
           </div>
-        )}
-      </div>
-    </nav>
+        </div>
+      )}
+    </>
   );
 }
