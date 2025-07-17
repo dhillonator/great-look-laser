@@ -1,16 +1,43 @@
 "use client"
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Star, Clock, MapPin, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { event } from '@/lib/analytics';
 
+interface Service {
+  name: string;
+  duration: string;
+  description: string;
+  price: string;
+  priceNote?: string;
+  benefit?: string;
+  link: string;
+  isPopular?: boolean;
+  badge?: string;
+}
+
 export default function HomePage() {
+  const [showStickyButton, setShowStickyButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroSection = document.getElementById('home');
+      if (heroSection) {
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+        setShowStickyButton(window.scrollY > heroBottom - 100);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const openCalendly = () => {
     window.location.href = 'https://calendly.com/baljinder-glls';
   };
 
-  const faqs = [
+  const faqs: Array<{ question: string; answer: string }> = [
     {
       question: "How does laser hair removal work?",
       answer: "Our advanced diode laser technology targets the melanin in your hair follicles. The laser energy is converted to heat, which damages the follicle and inhibits future hair growth while leaving the surrounding skin unaffected."
@@ -47,19 +74,19 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* Hero Section with Background Image */}
+      {/* Hero Section with Background Image - Enhanced for Complete View */}
       <section 
         id="home" 
         className="relative min-h-screen flex items-center justify-center"
         style={{
           backgroundImage: "url('/legs-image.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundSize: "cover", 
+          backgroundPosition: "45% center", // Default position to show more of the scene
           backgroundRepeat: "no-repeat"
         }}
       >
         {/* Gradient overlay to ensure text is readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
         
         {/* Content container with precise positioning */}
         <div className="container mx-auto px-4 relative" style={{ paddingTop: '11vh' }}>
@@ -75,7 +102,7 @@ export default function HomePage() {
               transition={{ duration: 0.8 }}
             >
               <motion.h1 
-                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-white"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-white drop-shadow-md"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -85,13 +112,23 @@ export default function HomePage() {
               </motion.h1>
               
               <motion.p 
-                className="text-xl md:text-2xl mb-5 text-white"
+                className="text-xl md:text-2xl mb-5 text-white drop-shadow-md"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 style={{ fontWeight: 300, letterSpacing: '0.03em', fontFamily: "'Roboto', sans-serif" }}
               >
-                Reveal Your Smoothest Skin
+                Reveal Your Smoothest Skin Today
+              </motion.p>
+              
+              <motion.p 
+                className="text-lg md:text-xl mb-6 text-white/90 drop-shadow-md"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                style={{ fontWeight: 400, letterSpacing: '0.02em' }}
+              >
+                ✨ Book your free consultation this week and start your journey to permanent hair removal
               </motion.p>
 
               <motion.div 
@@ -109,7 +146,7 @@ export default function HomePage() {
                     });
                     openCalendly();
                   }}
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-2 rounded-full text-base font-medium hover:opacity-90 transition-opacity text-white shadow-lg"
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-3 rounded-full text-lg font-semibold hover:opacity-90 hover:scale-105 transition-all duration-200 text-white shadow-lg touch-manipulation"
                 >
                   Book Now
                 </button>
@@ -120,7 +157,7 @@ export default function HomePage() {
                     category: 'Engagement',
                     label: 'Hero Section Learn More'
                   })}
-                  className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-5 py-2 rounded-full text-base font-medium hover:bg-white/30 transition-all"
+                  className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-white/30 hover:scale-105 transition-all duration-200 touch-manipulation"
                 >
                   Learn more
                 </a>
@@ -155,38 +192,64 @@ export default function HomePage() {
             Choose from our range of professional laser hair removal treatments.
           </motion.p>
           
-          <motion.p 
-            className="text-base text-orange-600 max-w-2xl mb-12 italic"
+          <motion.div 
+            className="flex flex-wrap gap-4 mb-8"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Our services are exclusively for women in a comfortable, private setting.
+            <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
+              ✓ Free Consultation
+            </div>
+            <div className="bg-pink-100 text-pink-800 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
+              ♀ Women-Only Environment
+            </div>
+            <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
+              🏆 Licensed & Certified
+            </div>
+          </motion.div>
+          
+          <motion.p 
+            className="text-base text-orange-600 max-w-2xl mb-12 italic"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            Professional treatments in a comfortable, private setting exclusively for women.
           </motion.p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
+            {([
               {
                 name: "Full Body",
                 duration: "2 hrs 30 min",
                 description: "Complete body treatment",
                 price: "$300",
+                priceNote: "per session",
+                benefit: "Save time on daily shaving",
                 link: "https://calendly.com/baljinder-glls/30min",
-                isPopular: true
+                isPopular: true,
+                badge: "Most Popular"
               },
               {
                 name: "Legs + Brazilian",
                 duration: "1 hr",
                 description: "Legs and Brazilian combo",
                 price: "$150",
-                link: "https://calendly.com/baljinder-glls/lower-body-legs-brazilian"
+                priceNote: "per session",
+                benefit: "Perfect summer package",
+                link: "https://calendly.com/baljinder-glls/lower-body-legs-brazilian",
+                badge: "Great Value"
               },
               {
                 name: "Face + Full Arms",
                 duration: "1 hr",
                 description: "Face and arms package",
                 price: "$100",
+                priceNote: "per session",
+                benefit: "Always camera-ready",
                 link: "https://calendly.com/baljinder-glls/full-face-arms"
               },
               {
@@ -194,6 +257,8 @@ export default function HomePage() {
                 duration: "30 min",
                 description: "Face and underarms combo",
                 price: "$50",
+                priceNote: "per session",
+                benefit: "Quick & convenient",
                 link: "https://calendly.com/baljinder-glls/full-face-arms-clone"
               },
               {
@@ -201,6 +266,8 @@ export default function HomePage() {
                 duration: "25 min",
                 description: "Complete facial treatment",
                 price: "$40",
+                priceNote: "per session",
+                benefit: "Smooth, confident skin",
                 link: "https://calendly.com/baljinder-glls/face-clone"
               },
               {
@@ -208,6 +275,8 @@ export default function HomePage() {
                 duration: "10 min",
                 description: "Quick underarm service",
                 price: "$20",
+                priceNote: "per session",
+                benefit: "No more daily shaving",
                 link: "https://calendly.com/baljinder-glls/underarms-clone"
               },
               {
@@ -215,6 +284,8 @@ export default function HomePage() {
                 duration: "45 min",
                 description: "Full legs treatment",
                 price: "$100",
+                priceNote: "per session",
+                benefit: "Silky smooth legs",
                 link: "https://calendly.com/baljinder-glls/legs-clone"
               },
               {
@@ -222,9 +293,11 @@ export default function HomePage() {
                 duration: "20 min",
                 description: "Brazilian area only",
                 price: "$50",
+                priceNote: "per session",
+                benefit: "Confidence & comfort",
                 link: "https://calendly.com/baljinder-glls/legs-brazilian-clone"
               }
-            ].map((service, index) => (
+            ] as Service[]).map((service, index) => (
               <motion.div
                 key={service.name}
                 initial={{ opacity: 0 }}
@@ -239,17 +312,25 @@ export default function HomePage() {
                   });
                   window.location.href = service.link;
                 }}
-                className="bg-white rounded-2xl p-6 shadow-md border border-orange-100 relative overflow-hidden cursor-pointer hover:shadow-lg hover:translate-y-[-5px] transition-all"
+                className="bg-white rounded-2xl p-6 shadow-md border border-orange-100 relative overflow-hidden cursor-pointer hover:shadow-xl hover:translate-y-[-2px] hover:scale-105 transition-all duration-300 touch-manipulation min-h-[200px]"
               >
-                {service.isPopular && (
-                  <div className="absolute top-0 right-0 bg-orange-500 text-white px-3 py-1 rounded-bl-lg text-sm">
-                    Most Popular
+                {service.badge && (
+                  <div className={`absolute top-0 right-0 px-3 py-1 rounded-bl-lg text-sm font-semibold ${
+                    service.isPopular ? 'bg-orange-500 text-white' : 'bg-green-500 text-white'
+                  }`}>
+                    {service.badge}
                   </div>
                 )}
                 <h3 className="text-xl font-semibold mb-2 text-gray-800">{service.name}</h3>
-                <p className="text-gray-600 mb-4">{service.duration} | {service.description}</p>
-                <div className="text-3xl font-bold text-orange-500 mb-4">
+                <p className="text-gray-600 mb-3">{service.duration} | {service.description}</p>
+                <div className="mb-3" style={{ minHeight: '1.5rem' }}>
+                  {/* Spacer to maintain consistent card heights */}
+                </div>
+                <div className="text-3xl font-bold text-orange-500 mb-1">
                   {service.price}
+                  {service.priceNote && (
+                    <span className="text-sm text-gray-500 font-normal ml-1">{service.priceNote}</span>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -292,7 +373,7 @@ export default function HomePage() {
                   category: 'Content',
                   label: faq.question
                 })}
-                className="bg-white rounded-2xl p-6 border border-green-200 shadow-md cursor-pointer hover:shadow-lg hover:border-green-300 transition-all"
+                className="bg-white rounded-2xl p-6 border border-green-200 shadow-md cursor-pointer hover:shadow-xl hover:border-green-300 hover:scale-105 transition-all duration-300 touch-manipulation min-h-[160px]"
               >
                 <h3 className="text-xl font-semibold mb-3 text-gray-800">{faq.question}</h3>
                 <p className="text-gray-600 whitespace-pre-line">{faq.answer}</p>
@@ -338,7 +419,7 @@ export default function HomePage() {
                 category: 'Contact',
                 label: 'Phone'
               })}
-              className="bg-white rounded-2xl p-6 border border-orange-100 shadow-md block hover:shadow-lg hover:translate-y-[-5px] transition-all"
+              className="bg-white rounded-2xl p-6 border border-orange-100 shadow-md block hover:shadow-xl hover:translate-y-[-2px] hover:scale-105 transition-all duration-300 touch-manipulation min-h-[120px]"
             >
               <div className="flex items-start gap-4">
                 <div className="bg-orange-100 p-3 rounded-xl">
@@ -367,7 +448,7 @@ export default function HomePage() {
                 category: 'Contact',
                 label: 'Location'
               })}
-              className="bg-white rounded-2xl p-6 border border-orange-100 shadow-md block hover:shadow-lg hover:translate-y-[-5px] transition-all"
+              className="bg-white rounded-2xl p-6 border border-orange-100 shadow-md block hover:shadow-xl hover:translate-y-[-2px] hover:scale-105 transition-all duration-300 touch-manipulation min-h-[120px]"
             >
               <div className="flex items-start gap-4">
                 <div className="bg-orange-100 p-3 rounded-xl">
@@ -390,7 +471,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="bg-white rounded-2xl p-6 border border-orange-100 shadow-md"
+              className="bg-white rounded-2xl p-6 border border-orange-100 shadow-md min-h-[120px]"
             >
               <div className="flex items-start gap-4">
                 <div className="bg-orange-100 p-3 rounded-xl">
@@ -441,7 +522,7 @@ export default function HomePage() {
           <div className="flex justify-center gap-4 mb-6">
             <button 
               onClick={openCalendly}
-              className="bg-orange-500 px-6 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+              className="bg-orange-500 px-8 py-3 rounded-full text-lg font-semibold hover:opacity-90 hover:scale-105 transition-all duration-200 touch-manipulation"
             >
               Book Now
             </button>
@@ -449,6 +530,30 @@ export default function HomePage() {
           <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Great Look Laser. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* Sticky Book Now Button */}
+      {showStickyButton && (
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 100 }}
+          className="fixed bottom-4 right-4 z-50"
+        >
+          <button
+            onClick={() => {
+              event({
+                action: 'sticky_booking',
+                category: 'Conversion',
+                label: 'Sticky Book Now'
+              });
+              openCalendly();
+            }}
+            className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:opacity-90 hover:scale-105 transition-all duration-200 touch-manipulation flex items-center gap-2"
+          >
+            📅 Book Now
+          </button>
+        </motion.div>
+      )}
     </div>
   );
 }

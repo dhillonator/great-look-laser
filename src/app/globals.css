@@ -76,7 +76,7 @@ button, a {
   color: transparent;
 }
 
-/* Custom shadows for cards */
+/* Enhanced shadows for mobile-first design */
 .shadow-soft {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 
               0 4px 6px -2px rgba(0, 0, 0, 0.025);
@@ -85,6 +85,59 @@ button, a {
 /* Orange glow for buttons on hover */
 .hover-glow:hover {
   box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+}
+
+/* Mobile-optimized touch interactions */
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Improved focus states for accessibility */
+button:focus, a:focus {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+}
+
+/* Enhanced mobile readability */
+@media (max-width: 768px) {
+  /* Improved contrast for mobile */
+  .text-gray-600 {
+    color: #4b5563 !important;
+  }
+  
+  .text-gray-700 {
+    color: #374151 !important;
+  }
+  
+  .text-gray-800 {
+    color: #1f2937 !important;
+  }
+  
+  /* Better line spacing for mobile reading */
+  p, li {
+    line-height: 1.7 !important;
+  }
+  
+  /* Improved mobile heading contrast */
+  h1, h2, h3 {
+    color: #111827 !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Enhanced sticky button for mobile */
+  .fixed.bottom-4.right-4 {
+    bottom: 1rem !important;
+    right: 1rem !important;
+    z-index: 999 !important;
+  }
+  
+  .fixed.bottom-4.right-4 button {
+    min-height: 56px !important;
+    min-width: 140px !important;
+    font-size: 1.1rem !important;
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.3) !important;
+  }
 }
 
 /* Improved mobile menu styling */
@@ -97,20 +150,129 @@ button, a {
   to { opacity: 1; }
 }
 
-/* Additional responsive improvements */
+/* Enhanced mobile optimization for touch devices */
 @media (max-width: 768px) {
-  /* Makes the background image position better on mobile */
+  /* Hero section mobile optimizations */
   #home {
-    background-position: 70% center !important;
+    background-position: 35% center !important;
+    background-size: 115% auto !important;
+    min-height: 100vh !important;
+    padding: 0 1rem !important;
   }
   
-  /* Ensures buttons are more touch-friendly on mobile */
-  .rounded-full {
-    min-height: 44px;
+  #home .relative.z-10 {
+    z-index: 20 !important;
+  }
+  
+  #home .absolute.inset-0.bg-gradient-to-r {
+    background: linear-gradient(to right, rgba(0,0,0,0.75) 20%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.3) 100%) !important;
+  }
+  
+  /* Mobile-first button improvements */
+  .rounded-full, button, a[role="button"] {
+    min-height: 48px !important;
+    min-width: 120px !important;
+    padding: 12px 24px !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    border-radius: 24px !important;
   }
   
   /* Better text readability on mobile */
   .drop-shadow-md {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Mobile heading sizes */
+  h1 {
+    font-size: 2.25rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  h2 {
+    font-size: 2rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  h3 {
+    font-size: 1.5rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Mobile paragraph text */
+  p {
+    font-size: 1.125rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  /* Mobile card improvements */
+  .bg-white.rounded-2xl {
+    padding: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  }
+  
+  /* Mobile spacing improvements */
+  .py-24 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  .px-4 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  /* Mobile grid improvements */
+  .grid.md\:grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .grid.md\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Optimizations for smaller mobile devices */
+@media (max-width: 480px) {
+  #home {
+    background-size: 125% auto !important;
+    background-position: 30% center !important;
+    padding: 0 1rem !important;
+  }
+  
+  /* Extra large touch targets for small screens */
+  .rounded-full, button, a[role="button"] {
+    min-height: 52px !important;
+    min-width: 140px !important;
+    padding: 14px 28px !important;
+    font-size: 1.2rem !important;
+    margin: 0.5rem 0 !important;
+  }
+  
+  /* Larger text for readability */
+  h1 {
+    font-size: 2rem !important;
+  }
+  
+  p {
+    font-size: 1.2rem !important;
+  }
+  
+  /* More generous spacing */
+  .bg-white.rounded-2xl {
+    padding: 2rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  /* Full-width cards on very small screens */
+  .max-w-6xl, .max-w-5xl {
+    padding: 0 1rem !important;
   }
 }
