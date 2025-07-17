@@ -54,21 +54,13 @@ export default function Topbar() {
               Great Look Laser
             </div>
 
-            {/* Mobile Actions */}
-            <div className="md:hidden flex items-center gap-3">
-              <a 
-                href="tel:604-723-9281"
-                className="bg-orange-500 text-white px-3 py-2 rounded-full text-sm font-semibold hover:bg-orange-600 transition-colors"
-              >
-                📞 Call
-              </a>
-              <button 
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`${scrolled ? 'text-gray-800' : 'text-white'}`}
-              >
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
-            </div>
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={`md:hidden ${scrolled ? 'text-gray-800' : 'text-white'}`}
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
@@ -104,12 +96,6 @@ export default function Topbar() {
               >
                 Contact
               </button>
-              <a 
-                href="tel:604-723-9281"
-                className={`md:hidden bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-orange-600 transition-colors`}
-              >
-                📞 Call Now
-              </a>
             </div>
           </div>
         </div>
