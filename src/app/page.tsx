@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { event } from '@/lib/analytics';
 import { trackBooking } from '@/lib/analytics';
 
-const CUSTOM_PARTS = ['Full Body', 'Legs', 'Brazilian', 'Underarms', 'Face', 'Full Arms'] as const;
+const CUSTOM_PARTS = ['Legs', 'Brazilian', 'Underarms', 'Face', 'Full Arms'] as const;
 
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
