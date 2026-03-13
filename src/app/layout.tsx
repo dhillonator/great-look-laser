@@ -46,7 +46,6 @@ export const metadata: Metadata = {
     images: ['https://greatlooklaser.ca/GLL-logo-bg.png'],
   },
   icons: {
-    icon: '/GLL-logo-transparent.png',
     apple: '/GLL-logo-bg.png',
   },
   robots: {
