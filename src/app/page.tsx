@@ -13,9 +13,9 @@ export default function HomePage() {
   const [customOpen, setCustomOpen] = useState(false);
   const [customParts, setCustomParts] = useState<string[]>([]);
 
-  const openCalendly = () => {
+  const scrollToPricing = () => {
     trackBooking();
-    window.location.href = 'https://calendly.com/baljinder-glls';
+    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const faqs = [
@@ -153,7 +153,7 @@ export default function HomePage() {
             <button
               onClick={() => {
                 event({ action: 'hero_booking', category: 'Conversion', label: 'Hero Section Book Now' });
-                openCalendly();
+                scrollToPricing();
               }}
               className="font-sans text-xs tracking-widest uppercase text-white border-b border-white/40 pb-1 hover:border-white transition-colors"
             >
@@ -455,7 +455,7 @@ export default function HomePage() {
                 <button
                   onClick={() => {
                     event({ action: 'contact_booking', category: 'Conversion', label: 'Contact Section Book Now' });
-                    openCalendly();
+                    scrollToPricing();
                   }}
                   className="font-sans text-xs tracking-widest uppercase text-[#8b7355] border-b border-[#8b7355] pb-1 hover:text-[#faf7f2] hover:border-[#faf7f2] transition-colors w-fit"
                 >
@@ -496,7 +496,7 @@ export default function HomePage() {
           </p>
           <div className="flex items-center gap-8">
             <button
-              onClick={openCalendly}
+              onClick={scrollToPricing}
               className="font-sans text-xs tracking-widest uppercase text-[#8b7355] border-b border-[#8b7355] pb-0.5 hover:text-[#faf7f2] hover:border-[#faf7f2] transition-colors"
             >
               Book Now →

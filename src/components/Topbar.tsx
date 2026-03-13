@@ -18,9 +18,10 @@ export default function Topbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const openCalendly = () => {
+  const scrollToPricing = () => {
     trackBooking();
-    window.location.href = 'https://calendly.com/baljinder-glls';
+    setIsMenuOpen(false);
+    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToSection = (id: string) => {
@@ -97,7 +98,7 @@ export default function Topbar() {
                 Contact
               </button>
               <button
-                onClick={openCalendly}
+                onClick={scrollToPricing}
                 className={`font-sans text-xs tracking-widest uppercase pb-0.5 border-b transition-colors ${
                   scrolled
                     ? 'text-[#8b7355] border-[#8b7355] hover:text-[#1c1917] hover:border-[#1c1917]'
@@ -149,7 +150,7 @@ export default function Topbar() {
               </button>
             ))}
             <button
-              onClick={openCalendly}
+              onClick={scrollToPricing}
               className="font-sans text-xs tracking-widest uppercase text-[#8b7355] border-b border-[#8b7355] pb-1 w-fit mt-4 hover:text-[#1c1917] hover:border-[#1c1917] transition-colors"
             >
               Book a Consultation →
