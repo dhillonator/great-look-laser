@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { trackBooking, event } from '@/lib/analytics';
@@ -8,21 +9,15 @@ import { trackBooking, event } from '@/lib/analytics';
 export default function Topbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  
-  // Handle scroll effect for transparent to solid navbar
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
-    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   const openCalendly = () => {
     trackBooking();
     window.location.href = 'https://calendly.com/baljinder-glls';
@@ -41,99 +36,123 @@ export default function Topbar() {
     }
   };
 
+  const navLinkClass = `font-sans text-xs tracking-widest uppercase transition-colors ${
+    scrolled ? 'text-[#78716c] hover:text-[#1c1917]' : 'text-white/70 hover:text-white'
+  }`;
+
   return (
     <>
-      {/* Fixed top nav bar - more compact for mobile */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-[#f5f0e5]/90 backdrop-blur-sm shadow-md' : 'bg-transparent'
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        scrolled
+          ? 'bg-[#faf7f2] border-b border-[#e2d9cc]'
+          : 'bg-transparent'
       }`}>
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-14">
-            {/* Logo/Brand */}
-            <div className={`font-semibold text-lg ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-              Great Look Laser
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`md:hidden ${scrolled ? 'text-gray-800' : 'text-white'}`}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="flex items-center justify-between h-16">
+            {/* Brand */}
+            <button
+              onClick={() => scrollToSection('home')}
+              className="flex items-center"
+              aria-label="Great Look Laser — home"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {scrolled ? (
+                <Image
+                  src="/GLL-logo-transparent.png"
+                  alt="Great Look Laser"
+                  width={80}
+                  height={44}
+                  className="object-contain"
+                  priority
+                />
+              ) : (
+                <span className="font-serif text-lg tracking-wide text-white">
+                  Great Look Laser
+                </span>
+              )}
             </button>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              <button 
-                onClick={() => scrollToSection('home')}
-                className={`text-sm transition-colors ${
-                  scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80'
-                }`}
-              >
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={`md:hidden transition-colors ${
+                scrolled ? 'text-[#1c1917]' : 'text-white'
+              }`}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+
+            {/* Desktop nav */}
+            <div className="hidden md:flex items-center gap-10">
+              <button onClick={() => scrollToSection('home')} className={navLinkClass}>
                 Home
               </button>
-              <button 
-                onClick={() => scrollToSection('pricing')}
-                className={`text-sm transition-colors ${
-                  scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80'
-                }`}
-              >
-                Pricing
+              <button onClick={() => scrollToSection('pricing')} className={navLinkClass}>
+                Services
               </button>
-              <button 
-                onClick={() => scrollToSection('faq')}
-                className={`text-sm transition-colors ${
-                  scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80'
-                }`}
-              >
+              <button onClick={() => scrollToSection('faq')} className={navLinkClass}>
                 FAQ
               </button>
-              <button 
-                onClick={() => scrollToSection('contact')}
-                className={`text-sm transition-colors ${
-                  scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-white/80'
+              <button onClick={() => scrollToSection('contact')} className={navLinkClass}>
+                Contact
+              </button>
+              <button
+                onClick={openCalendly}
+                className={`font-sans text-xs tracking-widest uppercase pb-0.5 border-b transition-colors ${
+                  scrolled
+                    ? 'text-[#8b7355] border-[#8b7355] hover:text-[#1c1917] hover:border-[#1c1917]'
+                    : 'text-white/80 border-white/40 hover:text-white hover:border-white'
                 }`}
               >
-                Contact
+                Book Now
               </button>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Fullscreen Mobile Menu - overlays content instead of pushing it down */}
+      {/* Mobile menu — ivory panel */}
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 pt-14 z-40 bg-black/90 backdrop-blur-md flex flex-col justify-center items-center menu-fullscreen">
-          <div className="flex flex-col gap-8 text-center">
-            <button 
-              onClick={() => scrollToSection('home')}
-              className="text-white text-xl font-medium"
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection('pricing')}
-              className="text-white text-xl font-medium"
-            >
-              Pricing
-            </button>
-            <button 
-              onClick={() => scrollToSection('faq')}
-              className="text-white text-xl font-medium"
-            >
-              FAQ
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact')}
-              className="text-white text-xl font-medium"
-            >
-              Contact
-            </button>
-            <button 
+        <div className="md:hidden fixed inset-0 z-40 bg-[#faf7f2] flex flex-col justify-center px-10">
+          {/* Close button */}
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-5 right-6 text-[#1c1917]"
+            aria-label="Close menu"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          <div className="flex flex-col gap-10">
+            <Image
+              src="/GLL-logo-transparent.png"
+              alt="Great Look Laser"
+              width={96}
+              height={52}
+              className="object-contain mb-2"
+            />
+            <p className="font-sans text-xs tracking-[0.25em] uppercase text-[#8b7355] -mt-6">
+              Navigation
+            </p>
+            {[
+              { label: 'Home', id: 'home' },
+              { label: 'Services', id: 'pricing' },
+              { label: 'FAQ', id: 'faq' },
+              { label: 'Contact', id: 'contact' },
+            ].map(({ label, id }) => (
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
+                className="font-serif text-4xl font-light text-[#1c1917] text-left hover:text-[#8b7355] transition-colors"
+              >
+                {label}
+              </button>
+            ))}
+            <button
               onClick={openCalendly}
-              className="mt-4 bg-orange-500 hover:bg-orange-600 px-8 py-3 rounded-full text-lg text-white font-medium transition-colors shadow-md"
+              className="font-sans text-xs tracking-widest uppercase text-[#8b7355] border-b border-[#8b7355] pb-1 w-fit mt-4 hover:text-[#1c1917] hover:border-[#1c1917] transition-colors"
             >
-              Book Now
+              Book a Consultation →
             </button>
           </div>
         </div>

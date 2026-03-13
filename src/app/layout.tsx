@@ -1,12 +1,22 @@
 import type { Metadata } from 'next'
-import { Roboto } from 'next/font/google'
+import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import './globals.css'
 import Topbar from '@/components/Topbar'
 import AnalyticsWrapper from '@/components/AnalyticsWrapper'
 
-const roboto = Roboto({
-  weight: ['100', '300', '400', '500', '700', '900'],
+const cormorant = Cormorant_Garamond({
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
   subsets: ['latin'],
+  variable: '--font-cormorant',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  weight: ['300', '400', '500'],
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -20,6 +30,24 @@ export const metadata: Metadata = {
     siteName: 'Great Look Laser',
     locale: 'en_CA',
     type: 'website',
+    images: [
+      {
+        url: 'https://greatlooklaser.ca/GLL-logo-bg.png',
+        width: 1408,
+        height: 768,
+        alt: 'Great Look Laser — Laser Hair Removal in Surrey, BC',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Great Look Laser | Professional Laser Hair Removal in Surrey',
+    description: 'Professional laser hair removal in Surrey, BC. For women of all skin types.',
+    images: ['https://greatlooklaser.ca/GLL-logo-bg.png'],
+  },
+  icons: {
+    icon: '/GLL-logo-transparent.png',
+    apple: '/GLL-logo-bg.png',
   },
   robots: {
     index: true,
@@ -46,7 +74,7 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'BeautySalon',
     name: 'Great Look Laser',
-    image: 'YOUR_BUSINESS_IMAGE_URL',
+    image: 'https://greatlooklaser.ca/GLL-logo-bg.png',
     '@id': 'https://greatlooklaser.ca',
     url: 'https://greatlooklaser.ca',
     telephone: '604-723-9281',
@@ -102,7 +130,7 @@ export default function RootLayout({
         <meta name="geo.position" content="49.164282;-122.844275" />
         <meta name="ICBM" content="49.164282, -122.844275" />
       </head>
-      <body className={roboto.className}>
+      <body className={`${cormorant.variable} ${dmSans.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}

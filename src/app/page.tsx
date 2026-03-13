@@ -1,12 +1,20 @@
 "use client"
 
-import React from 'react';
-import { Star, Clock, MapPin, Phone } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { event } from '@/lib/analytics';
+import { trackBooking } from '@/lib/analytics';
+
+const CUSTOM_PARTS = ['Full Body', 'Legs', 'Brazilian', 'Underarms', 'Face', 'Full Arms'] as const;
 
 export default function HomePage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [customOpen, setCustomOpen] = useState(false);
+  const [customParts, setCustomParts] = useState<string[]>([]);
+
   const openCalendly = () => {
+    trackBooking();
     window.location.href = 'https://calendly.com/baljinder-glls';
   };
 
@@ -45,379 +53,426 @@ export default function HomePage() {
     }
   ];
 
+  const services = [
+    {
+      name: "Full Body",
+      duration: "2 hrs 30 min",
+      price: "$300",
+      link: "https://calendly.com/baljinder-glls/full-body",
+    },
+    {
+      name: "Legs + Brazilian",
+      duration: "1 hr",
+      price: "$150",
+      link: "https://calendly.com/baljinder-glls/legs-brazilian",
+    },
+    {
+      name: "Face + Full Arms",
+      duration: "1 hr",
+      price: "$100",
+      link: "https://calendly.com/baljinder-glls/full-face-arms",
+    },
+    {
+      name: "Face + Underarms",
+      duration: "30 min",
+      price: "$50",
+      link: "https://calendly.com/baljinder-glls/face-underarms",
+    },
+    {
+      name: "Face",
+      duration: "25 min",
+      price: "$40",
+      link: "https://calendly.com/baljinder-glls/face",
+    },
+    {
+      name: "Underarms",
+      duration: "10 min",
+      price: "$20",
+      link: "https://calendly.com/baljinder-glls/underarms",
+    },
+    {
+      name: "Legs",
+      duration: "45 min",
+      price: "$100",
+      link: "https://calendly.com/baljinder-glls/legs",
+    },
+    {
+      name: "Brazilian",
+      duration: "20 min",
+      price: "$50",
+      link: "https://calendly.com/baljinder-glls/brazillian",
+    },
+  ];
+
   return (
     <div>
-      {/* Hero Section with Background Image */}
-      <section 
-        id="home" 
-        className="relative min-h-screen flex items-center justify-center"
-        style={{
-          backgroundImage: "url('/legs-image.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat"
-        }}
-      >
-        {/* Gradient overlay to ensure text is readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
-        
-        {/* Content container with precise positioning */}
-        <div className="container mx-auto px-4 relative" style={{ paddingTop: '11vh' }}>
-          <div className="grid grid-cols-12">
-            {/* Empty columns for spacing on small screens */}
-            <div className="hidden md:block col-span-3"></div>
-            
-            {/* Content positioned in the middle columns with responsive adjustments */}
-            <motion.div 
-              className="col-span-12 md:col-span-6 lg:col-span-5 xl:col-span-4 relative z-10 lg:ml-12 xl:ml-6 md:mt-30 lg:mt-34 xl:mt-38"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              <motion.h1 
-                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-white"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                style={{ fontWeight: 600, letterSpacing: '0.01em', fontFamily: "'Roboto', sans-serif" }}
-              >
-                Great Look Laser
-              </motion.h1>
-              
-              <motion.p 
-                className="text-xl md:text-2xl mb-5 text-white"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                style={{ fontWeight: 300, letterSpacing: '0.03em', fontFamily: "'Roboto', sans-serif" }}
-              >
-                Reveal Your Smoothest Skin
-              </motion.p>
+      {/* ── Hero ──────────────────────────────────── */}
+      <section id="home" className="relative h-screen min-h-[600px]">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/legs-image.jpg"
+            alt="Great Look Laser — smooth skin"
+            fill
+            priority
+            className="object-cover object-[70%_center] md:object-center"
+          />
+          {/* Warm overlay */}
+          <div className="absolute inset-0" style={{ background: 'rgba(15, 10, 5, 0.48)' }} />
+        </div>
 
-              <motion.div 
-                className="flex gap-3 flex-wrap"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                <button 
-                  onClick={() => {
-                    event({
-                      action: 'hero_booking',
-                      category: 'Conversion',
-                      label: 'Hero Section Book Now'
-                    });
-                    openCalendly();
-                  }}
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-2 rounded-full text-base font-medium hover:opacity-90 transition-opacity text-white shadow-lg"
-                >
-                  Book Now
-                </button>
-                <a 
-                  href="#pricing"
-                  onClick={() => event({
-                    action: 'hero_learn_more',
-                    category: 'Engagement',
-                    label: 'Hero Section Learn More'
-                  })}
-                  className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-5 py-2 rounded-full text-base font-medium hover:bg-white/30 transition-all"
-                >
-                  Learn more
-                </a>
-              </motion.div>
-            </motion.div>
-          </div>
+        {/* Content — lower-left */}
+        <div className="relative z-10 h-full flex items-end pb-16 md:pb-24 px-6 md:px-12 lg:px-20">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+            className="max-w-lg"
+          >
+            {/* Eyebrow */}
+            <p className="font-sans text-xs tracking-[0.3em] uppercase text-white/50 mb-6">
+              Surrey, BC — Laser Hair Removal
+            </p>
+
+            {/* Headline */}
+            <h1 className="font-serif font-light leading-none text-white mb-8"
+                style={{ fontSize: 'clamp(3.5rem, 9vw, 7rem)' }}>
+              Great Look<br />
+              <em>Laser</em>
+            </h1>
+
+            {/* Tagline */}
+            <p className="font-sans font-light text-white/70 mb-2 tracking-wide text-base">
+              Reveal your smoothest skin.
+            </p>
+            <p className="font-sans text-xs text-white/40 mb-10 tracking-wide">
+              For women of all skin types.
+            </p>
+
+            {/* CTA */}
+            <button
+              onClick={() => {
+                event({ action: 'hero_booking', category: 'Conversion', label: 'Hero Section Book Now' });
+                openCalendly();
+              }}
+              className="font-sans text-xs tracking-widest uppercase text-white border-b border-white/40 pb-1 hover:border-white transition-colors"
+            >
+              Book Now &nbsp;→
+            </button>
+          </motion.div>
         </div>
       </section>
 
-      {/* Pricing Section - Beige Background (from wall color) */}
-      <section id="pricing" className="min-h-screen py-24 px-4" style={{ backgroundColor: "#f5f0e5" }}>
-        <div className="max-w-6xl mx-auto">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-4 text-gray-800"
+      {/* ── Services / Pricing ────────────────────── */}
+      <section id="pricing" className="py-24 md:py-32 px-6 md:px-12 lg:px-20 bg-[#faf7f2]">
+        <div className="max-w-4xl mx-auto">
+          {/* Section heading */}
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ fontWeight: 700, letterSpacing: '-0.01em' }}
+            transition={{ duration: 0.7 }}
+            className="mb-16"
           >
-            Our Services
-          </motion.h2>
-          
-          <motion.p 
-            className="text-lg text-gray-600 max-w-2xl mb-3"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            style={{ fontWeight: 400 }}
-          >
-            Choose from our range of professional laser hair removal treatments.
-          </motion.p>
-          
-          <motion.p 
-            className="text-base text-orange-600 max-w-2xl mb-12 italic"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            Our services are exclusively for women in a comfortable, private setting.
-          </motion.p>
+            <p className="font-sans text-xs tracking-[0.25em] uppercase text-[#78716c] mb-4">
+              Services &amp; Pricing
+            </p>
+            <h2 className="font-serif font-light text-[#1c1917] leading-tight"
+                style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
+              Our Treatments
+            </h2>
+            <p className="font-sans text-sm text-[#8b7355] mt-4 italic">
+              Exclusively for women, in a comfortable private setting.
+            </p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                name: "Full Body",
-                duration: "2 hrs 30 min",
-                description: "Complete body treatment",
-                price: "$300",
-                link: "https://calendly.com/baljinder-glls/30min",
-                isPopular: true
-              },
-              {
-                name: "Legs + Brazilian",
-                duration: "1 hr",
-                description: "Legs and Brazilian combo",
-                price: "$150",
-                link: "https://calendly.com/baljinder-glls/lower-body-legs-brazilian"
-              },
-              {
-                name: "Face + Full Arms",
-                duration: "1 hr",
-                description: "Face and arms package",
-                price: "$100",
-                link: "https://calendly.com/baljinder-glls/full-face-arms"
-              },
-              {
-                name: "Face + Underarms",
-                duration: "30 min",
-                description: "Face and underarms combo",
-                price: "$50",
-                link: "https://calendly.com/baljinder-glls/full-face-arms-clone"
-              },
-              {
-                name: "Face",
-                duration: "25 min",
-                description: "Complete facial treatment",
-                price: "$40",
-                link: "https://calendly.com/baljinder-glls/face-clone"
-              },
-              {
-                name: "Underarms",
-                duration: "10 min",
-                description: "Quick underarm service",
-                price: "$20",
-                link: "https://calendly.com/baljinder-glls/underarms-clone"
-              },
-              {
-                name: "Legs",
-                duration: "45 min",
-                description: "Full legs treatment",
-                price: "$100",
-                link: "https://calendly.com/baljinder-glls/legs-clone"
-              },
-              {
-                name: "Brazilian",
-                duration: "20 min",
-                description: "Brazilian area only",
-                price: "$50",
-                link: "https://calendly.com/baljinder-glls/legs-brazilian-clone"
-              }
-            ].map((service, index) => (
-              <motion.div
+          {/* Price list */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            {services.map((service, index) => (
+              <div
                 key={service.name}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 + (index * 0.05) }}
                 onClick={() => {
-                  event({
-                    action: 'package_booking',
-                    category: 'Booking',
-                    label: service.name
-                  });
+                  event({ action: 'package_booking', category: 'Booking', label: service.name });
                   window.location.href = service.link;
                 }}
-                className="bg-white rounded-2xl p-6 shadow-md border border-orange-100 relative overflow-hidden cursor-pointer hover:shadow-lg hover:translate-y-[-5px] transition-all"
+                className={`group cursor-pointer grid grid-cols-12 items-baseline py-5 border-t border-[#e2d9cc] ${
+                  index === services.length - 1 ? 'border-b' : ''
+                }`}
               >
-                {service.isPopular && (
-                  <div className="absolute top-0 right-0 bg-orange-500 text-white px-3 py-1 rounded-bl-lg text-sm">
-                    Most Popular
-                  </div>
-                )}
-                <h3 className="text-xl font-semibold mb-2 text-gray-800">{service.name}</h3>
-                <p className="text-gray-600 mb-4">{service.duration} | {service.description}</p>
-                <div className="text-3xl font-bold text-orange-500 mb-4">
-                  {service.price}
+                {/* Service name */}
+                <div className="col-span-6 md:col-span-5">
+                  <span className="font-sans text-sm md:text-base font-medium text-[#1c1917] group-hover:text-[#8b7355] transition-colors">
+                    {service.name}
+                  </span>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* FAQ Section - Green accent from plants */}
-      <section id="faq" className="min-h-screen py-24 px-4 bg-gradient-to-b from-green-50 to-[#f5f0e5]/70">
-        <div className="max-w-5xl mx-auto">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-4 text-gray-800"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ fontWeight: 700, letterSpacing: '-0.01em' }}
-          >
-            Frequently Asked Questions
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-gray-600 max-w-2xl mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Everything you need to know about our laser hair removal treatments.
-          </motion.p>
-          <div className="grid md:grid-cols-2 gap-6">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 + (index * 0.05) }}
-                onClick={() => event({
-                  action: 'faq_view',
-                  category: 'Content',
-                  label: faq.question
-                })}
-                className="bg-white rounded-2xl p-6 border border-green-200 shadow-md cursor-pointer hover:shadow-lg hover:border-green-300 transition-all"
-              >
-                <h3 className="text-xl font-semibold mb-3 text-gray-800">{faq.question}</h3>
-                <p className="text-gray-600 whitespace-pre-line">{faq.answer}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section - Orange accent */}
-      <section id="contact" className="min-h-screen py-24 px-4" style={{ backgroundColor: "#f7f4ed" }}>
-        <div className="max-w-5xl mx-auto">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-4 text-gray-800"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ fontWeight: 700, letterSpacing: '-0.01em' }}
-          >
-            Contact Us
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-gray-600 max-w-2xl mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Book your free consultation today or reach out with any questions.
-          </motion.p>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Phone */}
-            <motion.a
-              href="tel:604-723-9281"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              onClick={() => event({
-                action: 'contact_click',
-                category: 'Contact',
-                label: 'Phone'
-              })}
-              className="bg-white rounded-2xl p-6 border border-orange-100 shadow-md block hover:shadow-lg hover:translate-y-[-5px] transition-all"
-            >
-              <div className="flex items-start gap-4">
-                <div className="bg-orange-100 p-3 rounded-xl">
-                  <Phone className="w-6 h-6 text-orange-500" />
+                {/* Duration */}
+                <div className="col-span-3 md:col-span-4">
+                  <span className="font-sans text-xs md:text-sm text-[#78716c]">
+                    {service.duration}
+                  </span>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-xl mb-2 text-gray-800">Call Us</h3>
-                  <p className="text-gray-600">
-                    (604) 723-9281
-                  </p>
+
+                {/* Price + book link */}
+                <div className="col-span-3 flex items-baseline justify-end gap-4 md:gap-6">
+                  <span className="font-serif text-xl md:text-2xl text-[#8b7355]">
+                    {service.price}
+                  </span>
+                  <span className="hidden md:inline font-sans text-xs tracking-widest uppercase text-[#8b7355] opacity-0 group-hover:opacity-100 transition-opacity">
+                    Book →
+                  </span>
                 </div>
               </div>
-            </motion.a>
+            ))}
 
-            {/* Location */}
-            <motion.a
-              href="https://maps.google.com/?q=8925+135A+St,+Surrey,+BC+V3V+5V2"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              onClick={() => event({
-                action: 'contact_click',
-                category: 'Contact',
-                label: 'Location'
-              })}
-              className="bg-white rounded-2xl p-6 border border-orange-100 shadow-md block hover:shadow-lg hover:translate-y-[-5px] transition-all"
-            >
-              <div className="flex items-start gap-4">
-                <div className="bg-orange-100 p-3 rounded-xl">
-                  <MapPin className="w-6 h-6 text-orange-500" />
+            {/* Custom booking — collapsible row */}
+            <div className="border-t border-[#e2d9cc]">
+              {/* Row header — same grid as service rows */}
+              <button
+                className="w-full group grid grid-cols-12 items-baseline py-5 text-left"
+                onClick={() => {
+                  setCustomOpen((o) => !o);
+                  if (!customOpen) setCustomParts([]);
+                }}
+              >
+                <div className="col-span-6 md:col-span-5">
+                  <span className="font-sans text-sm md:text-base font-medium text-[#1c1917] group-hover:text-[#8b7355] transition-colors">
+                    Custom
+                  </span>
                 </div>
+                <div className="col-span-3 md:col-span-4">
+                  <span className="font-sans text-xs md:text-sm text-[#78716c]">
+                    Build your own
+                  </span>
+                </div>
+                <div className="col-span-3 flex items-baseline justify-end">
+                  <span className="font-sans text-[#8b7355] text-lg">
+                    {customOpen ? '−' : '+'}
+                  </span>
+                </div>
+              </button>
+
+              {/* Expandable content */}
+              <AnimatePresence initial={false}>
+                {customOpen && (
+                  <motion.div
+                    key="custom-panel"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-8">
+                      <p className="font-sans text-sm text-[#78716c] mb-6">
+                        Select the areas you&apos;d like treated — we&apos;ll text you back to confirm.
+                      </p>
+
+                      {/* Checkboxes */}
+                      <div className="flex flex-wrap gap-x-8 gap-y-4 mb-8">
+                        {CUSTOM_PARTS.map((part) => {
+                          const checked = customParts.includes(part);
+                          return (
+                            <label
+                              key={part}
+                              className="flex items-center gap-2.5 cursor-pointer group"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={checked}
+                                onChange={() =>
+                                  setCustomParts((prev) =>
+                                    checked ? prev.filter((p) => p !== part) : [...prev, part]
+                                  )
+                                }
+                                className="w-4 h-4 rounded-none border border-[#e2d9cc] accent-[#8b7355] cursor-pointer"
+                              />
+                              <span className={`font-sans text-sm transition-colors ${
+                                checked ? 'text-[#8b7355]' : 'text-[#1c1917] group-hover:text-[#8b7355]'
+                              }`}>
+                                {part}
+                              </span>
+                            </label>
+                          );
+                        })}
+                      </div>
+
+                      {/* Book CTA */}
+                      <button
+                        disabled={customParts.length === 0}
+                        onClick={() => {
+                          event({ action: 'custom_booking', category: 'Booking', label: customParts.join(', ') });
+                          const body = `Hi, I'd like to book laser hair removal for: ${customParts.join(', ')}. Please call me back to confirm.`;
+                          window.location.href = `sms:+16047239281?body=${encodeURIComponent(body)}`;
+                        }}
+                        className={`font-sans text-xs tracking-widest uppercase pb-1 border-b transition-colors ${
+                          customParts.length === 0
+                            ? 'text-[#c4bdb4] border-[#e2d9cc] cursor-not-allowed'
+                            : 'text-[#8b7355] border-[#8b7355] hover:text-[#1c1917] hover:border-[#1c1917] cursor-pointer'
+                        }`}
+                      >
+                        Book Now →
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── FAQ ───────────────────────────────────── */}
+      <section id="faq" className="py-24 md:py-32 px-6 md:px-12 lg:px-20 bg-[#f2ece2]">
+        <div className="max-w-3xl mx-auto">
+          {/* Section heading */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="mb-16"
+          >
+            <p className="font-sans text-xs tracking-[0.25em] uppercase text-[#78716c] mb-4">FAQ</p>
+            <h2 className="font-serif font-light text-[#1c1917]"
+                style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
+              Common Questions
+            </h2>
+          </motion.div>
+
+          {/* Accordion */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            {faqs.map((faq, index) => (
+              <div key={index} className={`border-t border-[#e2d9cc] ${index === faqs.length - 1 ? 'border-b' : ''}`}>
+                <button
+                  className="w-full py-6 flex items-start justify-between text-left gap-8"
+                  onClick={() => {
+                    event({ action: 'faq_view', category: 'Content', label: faq.question });
+                    setOpenFaq(openFaq === index ? null : index);
+                  }}
+                >
+                  <span className="font-sans text-sm md:text-base font-medium text-[#1c1917]">
+                    {faq.question}
+                  </span>
+                  <span className="font-sans text-[#8b7355] text-lg flex-shrink-0 mt-0.5">
+                    {openFaq === index ? '−' : '+'}
+                  </span>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {openFaq === index && (
+                    <motion.div
+                      key="answer"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <p className="font-sans text-sm text-[#78716c] pb-6 leading-relaxed whitespace-pre-line max-w-2xl">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Contact ───────────────────────────────── */}
+      <section id="contact" className="py-24 md:py-32 px-6 md:px-12 lg:px-20 bg-[#1c1917]">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 md:gap-12">
+            {/* Left — details */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="flex flex-col justify-between gap-12"
+            >
+              <div>
+                <p className="font-sans text-xs tracking-[0.25em] uppercase text-[#8b7355] mb-4">
+                  Contact
+                </p>
+                <h2 className="font-serif font-light text-[#faf7f2]"
+                    style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
+                  Find Us
+                </h2>
+              </div>
+
+              <div className="space-y-10">
+                {/* Phone */}
                 <div>
-                  <h3 className="font-semibold text-xl mb-2 text-gray-800">Location</h3>
-                  <p className="text-gray-600">
+                  <p className="font-sans text-xs tracking-widest uppercase text-[#8b7355] mb-2">Phone</p>
+                  <a
+                    href="tel:604-723-9281"
+                    onClick={() => event({ action: 'contact_click', category: 'Contact', label: 'Phone' })}
+                    className="font-sans text-lg text-[#faf7f2] hover:text-[#8b7355] transition-colors"
+                  >
+                    (604) 723-9281
+                  </a>
+                </div>
+
+                {/* Address */}
+                <div>
+                  <p className="font-sans text-xs tracking-widest uppercase text-[#8b7355] mb-2">Address</p>
+                  <a
+                    href="https://maps.google.com/?q=8925+135A+St,+Surrey,+BC+V3V+5V2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => event({ action: 'contact_click', category: 'Contact', label: 'Location' })}
+                    className="font-sans text-base text-[#faf7f2]/80 leading-relaxed hover:text-[#faf7f2] transition-colors"
+                  >
                     8925 135A St<br />
                     Surrey, BC V3V 5V2<br />
-                    Client entrance on right side
-                  </p>
+                    <span className="text-[#78716c] text-sm">Client entrance on right side</span>
+                  </a>
                 </div>
-              </div>
-            </motion.a>
 
-            {/* Hours */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="bg-white rounded-2xl p-6 border border-orange-100 shadow-md"
-            >
-              <div className="flex items-start gap-4">
-                <div className="bg-orange-100 p-3 rounded-xl">
-                  <Clock className="w-6 h-6 text-orange-500" />
-                </div>
+                {/* Hours */}
                 <div>
-                  <h3 className="font-semibold text-xl mb-2 text-gray-800">Hours</h3>
-                  <p className="text-gray-600">
-                    Monday - Sunday<br />
-                    9:00 AM - 6:00 PM
+                  <p className="font-sans text-xs tracking-widest uppercase text-[#8b7355] mb-2">Hours</p>
+                  <p className="font-sans text-base text-[#faf7f2]/80 leading-relaxed">
+                    Monday – Sunday<br />
+                    9:00 AM – 6:00 PM
                   </p>
                 </div>
+
+                {/* CTA */}
+                <button
+                  onClick={() => {
+                    event({ action: 'contact_booking', category: 'Conversion', label: 'Contact Section Book Now' });
+                    openCalendly();
+                  }}
+                  className="font-sans text-xs tracking-widest uppercase text-[#8b7355] border-b border-[#8b7355] pb-1 hover:text-[#faf7f2] hover:border-[#faf7f2] transition-colors w-fit"
+                >
+                  Book Now →
+                </button>
               </div>
             </motion.div>
 
-            {/* Map */}
+            {/* Right — map */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              onClick={() => event({
-                action: 'map_view',
-                category: 'Contact',
-                label: 'Interactive Map'
-              })}
-              className="w-full h-[400px] rounded-2xl overflow-hidden border border-orange-100 shadow-md"
+              transition={{ duration: 0.7, delay: 0.15 }}
+              onClick={() => event({ action: 'map_view', category: 'Contact', label: 'Interactive Map' })}
+              className="h-[360px] md:h-full min-h-[360px] overflow-hidden"
+              style={{ filter: 'grayscale(25%) sepia(15%)' }}
             >
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2608.8511749214307!2d-122.84427542356186!3d49.16428198695977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5485d9ee362f0495%3A0x9f75f3a4f6982a56!2s8925%20135A%20St%2C%20Surrey%2C%20BC%20V3V%205V2!5e0!3m2!1sen!2sca!4v1702300784595!5m2!1sen!2sca"
@@ -427,26 +482,29 @@ export default function HomePage() {
                 allowFullScreen={true}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+              />
             </motion.div>
           </div>
         </div>
       </section>
-      
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4">
-        <div className="max-w-5xl mx-auto text-center">
-          <h3 className="text-xl font-semibold mb-4">Great Look Laser</h3>
-          <p className="text-gray-400 mb-6">Professional laser hair removal services in Surrey, BC</p>
-          <div className="flex justify-center gap-4 mb-6">
-            <button 
+
+      {/* ── Footer ────────────────────────────────── */}
+      <footer className="bg-[#231f1a] px-6 md:px-12 lg:px-20 py-8">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <p className="font-serif text-base text-[#faf7f2]/40 tracking-wide">
+            Great Look Laser
+          </p>
+          <div className="flex items-center gap-8">
+            <button
               onClick={openCalendly}
-              className="bg-orange-500 px-6 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+              className="font-sans text-xs tracking-widest uppercase text-[#8b7355] border-b border-[#8b7355] pb-0.5 hover:text-[#faf7f2] hover:border-[#faf7f2] transition-colors"
             >
-              Book Now
+              Book Now →
             </button>
+            <p className="font-sans text-xs text-[#faf7f2]/25">
+              © {new Date().getFullYear()} Great Look Laser
+            </p>
           </div>
-          <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Great Look Laser. All rights reserved.</p>
         </div>
       </footer>
     </div>

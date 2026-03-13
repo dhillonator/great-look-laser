@@ -3,114 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --background: #f7f4ed;
-  --foreground: #171717;
-  --accent: #f97316;
-  --accent-foreground: #ffffff;
-  --muted: #f5f0e5;
-  --muted-foreground: #737373;
+  --background:        #faf7f2;
+  --foreground:        #1c1917;
+  --accent:            #8b7355;
+  --accent-foreground: #faf7f2;
+  --surface-alt:       #f2ece2;
+  --text-secondary:    #78716c;
+  --border:            #e2d9cc;
+  --dark:              #1c1917;
+  --dark-alt:          #231f1a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Keep light theme for both modes */
-    --background: #f7f4ed;
-    --foreground: #171717;
-    --accent: #f97316;
-    --accent-foreground: #ffffff;
-    --muted: #f5f0e5;
-    --muted-foreground: #737373;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  scroll-behavior: smooth;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scrolling for the entire page */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Transitions for hover effects */
-button, a {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
-}
-
-@keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-  100% {
-    transform: translate(0px, 0px) scale(1);
-  }
-}
-
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-/* Background gradient text effect */
-.text-gradient {
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-/* Custom shadows for cards */
-.shadow-soft {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 
-              0 4px 6px -2px rgba(0, 0, 0, 0.025);
-}
-
-/* Orange glow for buttons on hover */
-.hover-glow:hover {
-  box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
-}
-
-/* Improved mobile menu styling */
-.menu-fullscreen {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Additional responsive improvements */
-@media (max-width: 768px) {
-  /* Makes the background image position better on mobile */
-  #home {
-    background-position: 70% center !important;
-  }
-  
-  /* Ensures buttons are more touch-friendly on mobile */
-  .rounded-full {
-    min-height: 44px;
-  }
-  
-  /* Better text readability on mobile */
-  .drop-shadow-md {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  }
+button,
+a {
+  transition: color 200ms ease, opacity 200ms ease, border-color 200ms ease;
 }
